@@ -2,3 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+.rotateOut {
+    animation: rotateOut;
+    animation-duration: 1s;
+    animation-direction:reverse;
+}
+
+.rotateIn {
+    animation: rotateIn;
+    animation-duration: 1s;
+}
+
+
