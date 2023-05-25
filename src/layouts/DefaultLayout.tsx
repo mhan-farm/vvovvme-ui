@@ -8,7 +8,7 @@ interface Props {
 const DefaultLayout = (props: Props) => {
   return (
     <>
-      <div className="flex flex-col h-screen bg-white">
+      <div className="flex flex-col h-screen bg-white dark:bg-slate-800">
         <Header />
         <main className="flex-1 flex">{props.children}</main>
         <Footer />
