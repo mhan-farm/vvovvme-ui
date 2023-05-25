@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 import HandleTheme from "../components/HandleTheme";
 import SearchPost from "../components/SearchPost";
+import Login from "../components/Login";
 
 const Header = () => {
   return (
     <>
       <header className="flex bg-transparent w-full h-20">
         <div className="flex w-full h-full items-center">
-          <div className="flex w-full h-full justify-between items-center px-5">
+          <div className="flex w-full h-full justify-between items-center px-36">
             <div>
               <Link
                 to={"/"}
@@ -17,9 +18,10 @@ const Header = () => {
               </Link>
             </div>
             <div className="flex items-center w-1/2">
-              <div className="flex w-full justify-end space-x-2 items-center">
+              <div className="flex w-full justify-end space-x-4 items-center">
                 <SearchPost />
                 <HandleTheme />
+                <Login />
               </div>
             </div>
           </div>
