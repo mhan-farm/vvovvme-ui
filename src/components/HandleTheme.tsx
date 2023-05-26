@@ -38,7 +38,7 @@ const ThemeButton = ({}: ThemeButtonProps) => {
   return (
     <>
       <div>
-        <label className="swap swap-rotate mt-1.5 text-neutral-600 hover:text-neutral-800 active:text-neutral-600 dark:text-neutral-300 dark:hover:text-neutral-50 dark:active:text-neutral-300">
+        <label className="swap swap-rotate mt-1.5 transition duration-150 ease-in-out hover:text-neutral-800 active:text-neutral-500 focus:text-neutral-800 dark:text-neutral-300 dark:hover:text-neutral-50 dark:active:text-neutral-300 dark:focus:text-neutral-50">
           <input onClick={toggleTheme} type="checkbox" />
           <svg
             xmlns="http://www.w3.org/2000/svg"
