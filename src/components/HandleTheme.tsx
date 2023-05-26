@@ -1,9 +1,25 @@
-import { useState } from "react";
+import { useState, useLayoutEffect } from "react";
 import "animate.css";
+
+const LOCAL_STORAGE_KEY = {
+  THEME: "theme",
+} as const;
+
+const THEME = {
+  LIGHT: "light",
+  DARK: "dark",
+} as const;
 
 interface ThemeButtonProps {}
 
 const ThemeButton = ({}: ThemeButtonProps) => {
+  useLayoutEffect(() => {
+    const theme = localStorage.getItem(LOCAL_STORAGE_KEY.THEME);
+    if (theme === THEME.DARK) {
+      document.querySelector("html")?.classList.add(THEME.DARK);
+    }
+  }, []);
+
   const toggleTheme = () => {
     const htmlEl = document.querySelector("html");
     if (!htmlEl) return;
@@ -12,10 +28,10 @@ const ThemeButton = ({}: ThemeButtonProps) => {
 
     if (enabledDarkMode) {
       htmlEl.classList.remove("dark");
-      htmlEl.classList.add("light");
+      localStorage.removeItem(LOCAL_STORAGE_KEY.THEME);
     } else {
-      htmlEl.classList.remove("light");
       htmlEl.classList.add("dark");
+      localStorage.setItem(LOCAL_STORAGE_KEY.THEME, THEME.DARK);
     }
   };
 
