@@ -20,14 +20,14 @@ const Posts = () => {
   }, []);
 
   return (
-    <div className="container my-28">
+    <div className="container my-28 mx-auto">
       <section className="text-gray-800">
         <SortBtn />
 
-        <div className="grid lg:grid-cols-3 gap-6 xl:gap-x-12">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6 xl:gap-x-12">
           {posts ? (
-            posts.map((post) => (
-              <Link key={post.postId} to={"/"} className="hvr-float">
+            posts.map((post, index) => (
+              <Link key={index} to={"/"} className="hvr-float">
                 <div className="mb-6 lg:mb-0">
                   <div>
                     <div

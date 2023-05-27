@@ -1,6 +1,6 @@
 const SortBtn = () => {
   return (
-    <div className="flex justify-center space-x-1 mb-5">
+    <div className="flex justify-center space-x-1 mb-7">
       <div className="flex justify-center items-center p-1 rounded-full dark:bg-slate-700 active:scale-95 hover:shadow-xl dark:hover:shadow-xl">
         <svg
           xmlns="http://www.w3.org/2000/svg"
