@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import SortBtn from "../components/SortBtn";
 import PostService from "../services/PostService";
 import { Post } from "../interface/response/Post";
 import { Link } from "react-router-dom";
 
 const Posts = () => {
   const [posts, setPosts] = useState<Post[]>([]);
+
   useEffect(() => {
     PostService.getPosts()
       .then((response) => {
@@ -20,15 +22,13 @@ const Posts = () => {
   return (
     <div className="container my-28">
       <section className="text-gray-800">
-        <h2 className="text-3xl font-bold mb-10 text-center">
-          Latest articles
-        </h2>
+        <SortBtn />
 
         <div className="grid lg:grid-cols-3 gap-6 xl:gap-x-12">
           {posts ? (
             posts.map((post) => (
-              <div key={post.postId}>
-                <div className="mb-5">
+              <Link key={post.postId} to={"/"} className="hvr-float">
+                <div className="mb-6 lg:mb-0">
                   <div>
                     <div
                       className="relative overflow-hidden bg-no-repeat bg-cover relative overflow-hidden bg-no-repeat bg-cover ripple shadow-lg rounded-lg mb-6"
@@ -36,13 +36,11 @@ const Posts = () => {
                       data-mdb-ripple-color="light"
                     >
                       <img
-                        src="https://mdbootstrap.com/img/new/standard/city/059.jpg"
+                        src="https://mdbootstrap.com/img/new/standard/city/018.jpg"
                         className="w-full"
                         alt="Louvre"
                       />
-                      <a href="#!">
-                        <div className="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed opacity-0 hover:opacity-100 transition duration-300 ease-in-out"></div>
-                      </a>
+                      <div className="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed bg-black opacity-0 hover:opacity-30 transition duration-300 ease-in-out"></div>
                     </div>
 
                     <div className="flex space-x-2 text-neutral-600 dark:text-neutral-300 text-sm">
@@ -55,7 +53,7 @@ const Posts = () => {
                       <div className="flex items-center space-x-0.5">
                         <div>by</div>
                         <Link
-                          to={"#"}
+                          to={"/userPage"}
                           className="transition duration-150 ease-in-out hover:text-neutral-800 active:text-neutral-500 focus:text-neutral-800 dark:text-neutral-300 dark:hover:text-neutral-50 dark:active:text-neutral-300 dark:focus:text-neutral-50"
                         >
                           {post.author.username}
@@ -63,12 +61,9 @@ const Posts = () => {
                       </div>
                     </div>
 
-                    <Link
-                      to={"#"}
-                      className="hvr-sweep-to-right font-bold text-3xl transition duration-150 ease-in-out text-neutral-800 hover:text-amber-500 active:text-amber-600 focus:text-amber-500 dark:text-neutral-50 dark:hover:text-amber-400 dark:active:text-amber-500 dark:focus:text-amber-400"
-                    >
+                    <div className="font-bold text-3xl transition duration-150 ease-in-out text-neutral-800 hover:text-amber-500 active:text-amber-600 focus:text-amber-500 dark:text-neutral-50 dark:hover:text-amber-400 dark:active:text-amber-500 dark:focus:text-amber-400">
                       {post.title}
-                    </Link>
+                    </div>
 
                     <div className="text-neutral-600 dark:text-neutral-300">
                       {post.content}
@@ -77,7 +72,7 @@ const Posts = () => {
                       risus eget massa volutpat feugiat. Donec...
                     </div>
 
-                    <div className="flex justify-between">
+                    <div className="flex justify-between text-neutral-600 dark:text-neutral-300">
                       <div className="flex space-x-0.5">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -94,7 +89,7 @@ const Posts = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))
           ) : (
             <>null</>
