@@ -6,9 +6,11 @@ import { Link } from "react-router-dom";
 
 const Posts = () => {
   const [posts, setPosts] = useState<Post[]>([]);
+  const [sort, setSort] = useState<string>("");
+  const size = 12;
 
   useEffect(() => {
-    PostService.getPosts()
+    PostService.getOrderByCreatedPosts(size)
       .then((response) => {
         console.log(response.data);
         const posts = response.data.content;
@@ -19,17 +21,30 @@ const Posts = () => {
       });
   }, []);
 
+  const getSort = (sort: string) => {
+    setSort(sort);
+    PostService.getOrderByLikesOrViewsPosts(size, sort)
+      .then((response) => {
+        console.log(response.data);
+        const posts = response.data.content;
+        setPosts(posts);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div className="container my-28 mx-auto">
       <section className="text-gray-800">
-        <SortBtn />
+        <SortBtn setSort={getSort} />
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6 xl:gap-x-12">
           {posts ? (
             posts.map((post, index) => (
               <Link key={index} to={"/"} className="hvr-float">
-                <div className="mb-6 lg:mb-0">
-                  <div>
+                <div className="mb-6 lg:mb-0 hover:shadow-xl rounded-md p-4">
+                  <div className="space-y-1">
                     <div
                       className="relative overflow-hidden bg-no-repeat bg-cover relative overflow-hidden bg-no-repeat bg-cover ripple shadow-lg rounded-lg mb-6"
                       data-mdb-ripple="true"
@@ -61,7 +76,7 @@ const Posts = () => {
                       </div>
                     </div>
 
-                    <div className="font-bold text-3xl transition duration-150 ease-in-out text-neutral-800 hover:text-amber-500 active:text-amber-600 focus:text-amber-500 dark:text-neutral-50 dark:hover:text-amber-400 dark:active:text-amber-500 dark:focus:text-amber-400">
+                    <div className="w-24 font-bold text-3xl transition duration-150 ease-in-out text-neutral-800 hover:text-amber-500 active:text-amber-600 focus:text-amber-500 dark:text-neutral-50 dark:hover:text-amber-400 dark:active:text-amber-500 dark:focus:text-amber-400">
                       {post.title}
                     </div>
 
