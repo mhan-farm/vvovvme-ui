@@ -3,11 +3,36 @@ import HandleTheme from "../components/HandleTheme";
 import SearchPost from "../components/SearchPost";
 import LoginBtn from "../components/LoginBtn";
 import HambergerMenu from "../components/HambergerMenu";
+import { useEffect, useState } from "react";
 
 const Header = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [prevScrollPos, setPrevScrollPos] = useState(window.pageYOffset);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollPos = window.pageYOffset;
+      const isScrollingDown = currentScrollPos > prevScrollPos;
+
+      setIsScrolled(isScrollingDown);
+      setPrevScrollPos(currentScrollPos);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [prevScrollPos]);
+
   return (
     <>
-      <header className="flex z-50 fixed top-0 left-0 right-0 py-5 mx-10 md:mx-20 bg-white dark:bg-slate-800">
+      <header
+        className={`flex z-50 fixed top-0 left-0 right-0 py-5 px-10 md:px-20 bg-white dark:bg-neutral-800
+        transition-transform duration-300 ease-in-out ${
+          isScrolled ? "-translate-y-20" : ""
+        }`}
+      >
         <div className="flex w-full h-full items-center">
           <div className="flex w-full h-full justify-between items-center">
             <div>

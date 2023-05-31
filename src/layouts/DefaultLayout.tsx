@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import Footer from "./Footer";
 import Header from "./Header";
 
@@ -8,9 +9,9 @@ interface Props {
 const DefaultLayout = (props: Props) => {
   return (
     <>
-      <div className="flex flex-col h-screen bg-white dark:bg-slate-800">
+      <div className="flex flex-col min-h-screen bg-white dark:bg-neutral-800">
         <Header />
-        <main className="flex-1 flex">{props.children}</main>
+        <main className="flex flex-1">{props.children}</main>
         <Footer />
       </div>
     </>
