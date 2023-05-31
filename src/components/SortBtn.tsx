@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { idText } from "typescript";
 
 interface sortProps {
   setSort: (sort: string) => void;
@@ -9,7 +8,7 @@ const SortBtn = ({ setSort }: sortProps) => {
   const [sortData, setSortData] = useState<string>("created"); //created, likes, views
 
   const handleSort = (sortData: string) => {
-    setSort(sortData);
+    setSort(sortData + ",DESC");
     setSortData(sortData);
   };
 

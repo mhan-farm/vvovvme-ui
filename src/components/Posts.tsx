@@ -2,36 +2,48 @@ import { useEffect, useState } from "react";
 import SortBtn from "../components/SortBtn";
 import PostService from "../services/PostService";
 import { Post } from "../interface/response/Post";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useInView } from "react-intersection-observer";
 
 const Posts = () => {
   const [posts, setPosts] = useState<Post[]>([]);
-  const [sort, setSort] = useState<string>("");
   const size = 12;
+  const [page, setPage] = useState<number>(0);
+  const [sort, setSort] = useState<string>("created");
+  const [ref, inView] = useInView();
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    PostService.getOrderByCreatedPosts(size)
+  const getPosts = () => {
+    PostService.getOrderBySortPosts(page, size, sort)
       .then((response) => {
         console.log(response.data);
-        const posts = response.data.content;
-        setPosts(posts);
+        const content = response.data.content;
+        setPosts([...posts, ...content]);
+        setPage((before) => before + 1);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  };
+
+  useEffect(() => {
+    if (inView) {
+      getPosts();
+    }
+  }, [inView]);
 
   const getSort = (sort: string) => {
     setSort(sort);
-    PostService.getOrderByLikesOrViewsPosts(size, sort)
-      .then((response) => {
-        console.log(response.data);
-        const posts = response.data.content;
-        setPosts(posts);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  };
+
+  useEffect(() => {
+    setPosts([]);
+    setPage(0);
+    getPosts();
+  }, [sort]);
+
+  const postDetail = (post_id: number) => {
+    navigate(`/${post_id}`);
   };
 
   return (
@@ -42,7 +54,11 @@ const Posts = () => {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6 xl:gap-x-12">
           {posts ? (
             posts.map((post, index) => (
-              <Link key={index} to={"/"} className="hvr-float">
+              <div
+                key={index}
+                onClick={() => postDetail(post.post_id)}
+                className="hvr-float"
+              >
                 <div className="mb-6 lg:mb-0 hover:shadow-xl rounded-md p-4">
                   <div className="space-y-1">
                     <div
@@ -104,11 +120,12 @@ const Posts = () => {
                     </div>
                   </div>
                 </div>
-              </Link>
+              </div>
             ))
           ) : (
             <>null</>
           )}
+          <div ref={ref}></div>
         </div>
       </section>
     </div>

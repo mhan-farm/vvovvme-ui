@@ -5,30 +5,22 @@ import { Post } from "../interface/response/Post";
 
 const POST_URL = `http://localhost:8080/api/v1/posts`;
 
-const getOrderByCreatedPosts = async (
-  size: number
-): Promise<Response<Page<Post>>> => {
-  return await HttpService.getAxiosClient()
-    .get<Response<Page<Post>>>(POST_URL, { params: { size: size } })
-    .then((response) => {
-      return response.data;
-    });
-};
-
-const getOrderByLikesOrViewsPosts = async (
+const getOrderBySortPosts = async (
+  page: number,
   size: number,
   sort: string
 ): Promise<Response<Page<Post>>> => {
   return await HttpService.getAxiosClient()
-    .get<Response<Page<Post>>>(POST_URL, { params: { size: size, sort: sort } })
+    .get<Response<Page<Post>>>(POST_URL, {
+      params: { page: page, size: size, sort: sort },
+    })
     .then((response) => {
       return response.data;
     });
 };
 
 const PostService = {
-  getOrderByCreatedPosts,
-  getOrderByLikesOrViewsPosts,
+  getOrderBySortPosts,
 };
 
 export default PostService;
