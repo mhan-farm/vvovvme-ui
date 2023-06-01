@@ -14,80 +14,40 @@ const SortBtn = ({ setSort }: sortProps) => {
 
   return (
     <div className="flex justify-center space-x-2 mb-7">
-      <div>
-        <input
-          id="created"
-          type="radio"
-          defaultChecked={sortData === "created"}
-          className="hidden"
-          onClick={() => handleSort("created")}
-        />
-        <label
-          htmlFor="created"
-          className={
-            sortData === "created"
-              ? `flex justify-center items-center p-1.5 rounded-full shadow-xl shadow-neutral-400 dark:bg-neutral-800 dark:shadow-black`
-              : `flex justify-center items-center p-1.5 rounded-full dark:bg-neutral-800 active:scale-95 hover:shadow-xl shadow-neutral-400 dark:hover:shadow-black`
-          }
-        >
-          <svg
-            className="w-7 h-7"
-            id="Icons"
-            enableBackground="new 0 0 32 32"
-            version="1.1"
-            viewBox="0 0 32 32"
-            xmlSpace="preserve"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlnsXlink="http://www.w3.org/1999/xlink"
+      <div className="flex flex-col">
+        {/* <div className="flex bg-neutral-100 px-2 pt-1 items-center rounded-sm">
+          <div className="text-xs">최근 작성된 게시글</div>
+        </div> */}
+        <div className="flex">
+          <input
+            id="created"
+            type="radio"
+            defaultChecked={sortData === "created"}
+            className="hidden"
+            onClick={() => handleSort("created")}
+          />
+          <label
+            htmlFor="created"
+            className={`flex justify-center items-center p-1.5 rounded-full cursor-pointer ${
+              sortData === "created"
+                ? `shadow-xl shadow-neutral-400 dark:bg-neutral-800 dark:shadow-black`
+                : `dark:bg-neutral-800 active:scale-95 hover:shadow-xl shadow-neutral-400 dark:hover:shadow-black`
+            }`}
           >
-            <style type="text/css"></style>
-            <polyline
-              d="M50 10L10 90H90L50 10z"
-              fill="none"
-              className="stroke-neutral-800 dark:stroke-neutral-200"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeMiterlimit="10"
-              points="19,3 19,9 25,9 19,3 7,3 7,29 22,29 "
-            />
-            <circle
-              d="M50 10L10 90H90L50 10z"
-              fill="none"
-              className="stroke-neutral-800 dark:stroke-neutral-200"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeMiterlimit="10"
-              cx="22"
-              cy="22"
-              r="7"
-            />
-            <polyline
-              d="M50 10L10 90H90L50 10z"
-              fill="none"
-              className="stroke-neutral-800 dark:stroke-neutral-200"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeMiterlimit="10"
-              points="22,15 22,22 29,22 "
-            />
-            <line
-              d="M50 10L10 90H90L50 10z"
-              fill="none"
-              className="stroke-neutral-800 dark:stroke-neutral-200"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeMiterlimit="10"
-              x1="25"
-              x2="25"
-              y1="9"
-              y2="15.7"
-            />
-          </svg>
-        </label>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              className="w-6 h-6 fill-neutral-800 dark:fill-neutral-200"
+            >
+              <path
+                fillRule="evenodd"
+                d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 6a.75.75 0 00-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 000-1.5h-3.75V6z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </label>
+        </div>
       </div>
 
       <div>
@@ -100,54 +60,19 @@ const SortBtn = ({ setSort }: sortProps) => {
         />
         <label
           htmlFor="likes"
-          className={
+          className={`flex justify-center items-center p-1.5 rounded-full cursor-pointer ${
             sortData === "likes"
-              ? `flex justify-center items-center p-1.5 rounded-full shadow-xl shadow-neutral-400 dark:bg-neutral-800 dark:shadow-black`
-              : `flex justify-center items-center p-1.5 rounded-full dark:bg-neutral-800 active:scale-95 hover:shadow-xl shadow-neutral-400 dark:hover:shadow-black`
-          }
+              ? `shadow-xl shadow-neutral-400 dark:bg-neutral-800 dark:shadow-black`
+              : `dark:bg-neutral-800 active:scale-95 hover:shadow-xl shadow-neutral-400 dark:hover:shadow-black`
+          }`}
         >
           <svg
-            id="Icons"
-            className="w-7 h-7"
-            enableBackground="new 0 0 32 32"
-            version="1.1"
-            viewBox="0 0 32 32"
-            xmlSpace="preserve"
             xmlns="http://www.w3.org/2000/svg"
-            xmlnsXlink="http://www.w3.org/1999/xlink"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            className="w-6 h-6 fill-neutral-800 dark:fill-neutral-200"
           >
-            <style type="text/css"></style>
-            <polyline
-              d="M50 10L10 90H90L50 10z"
-              fill="none"
-              className="stroke-neutral-800 dark:stroke-neutral-200"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeMiterlimit="10"
-              points="19,3 19,9 25,9 19,3 7,3 7,29 25,29 25,22 "
-            />
-            <path
-              fill="none"
-              className="stroke-neutral-800 dark:stroke-neutral-200"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeMiterlimit="10"
-              d="M28.2,13.9c-1.1-1.2-2.9-1.2-4,0l-1.7,1.7l-1.7-1.7c-1.1-1.2-2.9-1.2-4,0s-1.1,3,0,4.2l1.7,1.7l4,4.2l4-4.2  l1.7-1.7C29.3,16.9,29.3,15,28.2,13.9z"
-            />
-            <line
-              fill="none"
-              className="stroke-neutral-800 dark:stroke-neutral-200"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeMiterlimit="10"
-              x1="25"
-              x2="25"
-              y1="9"
-              y2="13"
-            />
+            <path d="M9.653 16.915l-.005-.003-.019-.01a20.759 20.759 0 01-1.162-.682 22.045 22.045 0 01-2.582-1.9C4.045 12.733 2 10.352 2 7.5a4.5 4.5 0 018-2.828A4.5 4.5 0 0118 7.5c0 2.852-2.044 5.233-3.885 6.82a22.049 22.049 0 01-3.744 2.582l-.019.01-.005.003h-.002a.739.739 0 01-.69.001l-.002-.001z" />
           </svg>
         </label>
       </div>
@@ -162,43 +87,23 @@ const SortBtn = ({ setSort }: sortProps) => {
         />
         <label
           htmlFor="views"
-          className={
+          className={`flex justify-center items-center p-1.5 rounded-full cursor-pointer ${
             sortData === "views"
-              ? `flex justify-center items-center p-1.5 rounded-full shadow-xl shadow-neutral-400 dark:bg-neutral-800 dark:shadow-black`
-              : `flex justify-center items-center p-1.5 rounded-full dark:bg-neutral-800 active:scale-95 hover:shadow-xl shadow-neutral-400 dark:hover:shadow-black`
-          }
+              ? `shadow-xl shadow-neutral-400 dark:bg-neutral-800 dark:shadow-black`
+              : `dark:bg-neutral-800 active:scale-95 hover:shadow-xl shadow-neutral-400 dark:hover:shadow-black`
+          }`}
         >
           <svg
-            id="Icons"
-            className="w-7 h-7"
-            enableBackground="new 0 0 32 32"
-            version="1.1"
-            viewBox="0 0 32 32"
-            xmlSpace="preserve"
             xmlns="http://www.w3.org/2000/svg"
-            xmlnsXlink="http://www.w3.org/1999/xlink"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            className="w-6 h-6 fill-neutral-800 dark:fill-neutral-200"
           >
-            <style type="text/css"></style>
-            <polyline
-              fill="none"
-              className="stroke-neutral-800 dark:stroke-neutral-200"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeMiterlimit="10"
-              points="18,3 18,9 24,9 18,3 6,3 6,29 24,29 24,24.9 "
+            <path
+              fillRule="evenodd"
+              d="M12.963 2.286a.75.75 0 00-1.071-.136 9.742 9.742 0 00-3.539 6.177A7.547 7.547 0 016.648 6.61a.75.75 0 00-1.152-.082A9 9 0 1015.68 4.534a7.46 7.46 0 01-2.717-2.248zM15.75 14.25a3.75 3.75 0 11-7.313-1.172c.628.465 1.35.81 2.133 1a5.99 5.99 0 011.925-3.545 3.75 3.75 0 013.255 3.717z"
+              clipRule="evenodd"
             />
-            <g>
-              <path
-                fill="none"
-                className="stroke-neutral-800 dark:stroke-neutral-200"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeMiterlimit="10"
-                d="M27.2,17.7c-0.5,0.9-1.3,1.4-2.4,1.5c-0.6,0.1-1-0.3-1-0.8c-0.1-1.1-0.1-2.2-0.3-3.3c-0.2-1.2-0.8-2.2-1.6-3.1   c0,0-0.1,0-0.1,0.1c-0.5,1.3-1.4,2.4-2.2,3.6c-1.1,1.4-1.6,3-1.6,4.8c0.1,2.4,2.4,4.6,5,4.5c2.4,0,4.5-1.7,4.9-3.9   c0.3-1.2,0.1-2.7-0.4-3.8C27.4,17.5,27.3,17.6,27.2,17.7z"
-              />
-            </g>
           </svg>
         </label>
       </div>

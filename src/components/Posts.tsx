@@ -28,6 +28,7 @@ const Posts = () => {
 
   useEffect(() => {
     if (inView) {
+      console.log("inview만 변경");
       getPosts();
     }
   }, [inView]);
@@ -40,6 +41,7 @@ const Posts = () => {
     setPosts([]);
     setPage(0);
     getPosts();
+    console.log("sort만 변경");
   }, [sort]);
 
   const postDetail = (post_id: number) => {
@@ -57,9 +59,9 @@ const Posts = () => {
               <div
                 key={index}
                 onClick={() => postDetail(post.post_id)}
-                className="hvr-float"
+                className="hvr-float hover:bg-neutral-100 dark:hover:bg-neutral-900 rounded-xl"
               >
-                <div className="mb-6 lg:mb-0 hover:shadow-xl rounded-md p-4">
+                <div className="mb-6 lg:mb-0 hover:shadow-2xl dark:hover:shadow-black rounded-xl p-4">
                   <div className="space-y-1">
                     <div
                       className="relative overflow-hidden bg-no-repeat bg-cover relative overflow-hidden bg-no-repeat bg-cover ripple shadow-lg rounded-lg mb-6"
@@ -98,23 +100,51 @@ const Posts = () => {
 
                     <div className="text-neutral-600 dark:text-neutral-300">
                       {post.content}
-                      Curabitur tristique, mi a mollis sagittis, metus felis
-                      mattis arcu, non vehicula nisl dui quis diam. Mauris ut
-                      risus eget massa volutpat feugiat. Donec...
+                      ...
                     </div>
 
                     <div className="flex justify-between text-neutral-600 dark:text-neutral-300">
-                      <div className="flex space-x-0.5">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                          className="w-5 h-5"
-                        >
-                          <path d="M9.653 16.915l-.005-.003-.019-.01a20.759 20.759 0 01-1.162-.682 22.045 22.045 0 01-2.582-1.9C4.045 12.733 2 10.352 2 7.5a4.5 4.5 0 018-2.828A4.5 4.5 0 0118 7.5c0 2.852-2.044 5.233-3.885 6.82a22.049 22.049 0 01-3.744 2.582l-.019.01-.005.003h-.002a.739.739 0 01-.69.001l-.002-.001z" />
-                        </svg>
+                      <div className="flex space-x-2">
+                        <div className="flex space-x-0.5">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            className="w-5 h-5"
+                          >
+                            <path d="M9.653 16.915l-.005-.003-.019-.01a20.759 20.759 0 01-1.162-.682 22.045 22.045 0 01-2.582-1.9C4.045 12.733 2 10.352 2 7.5a4.5 4.5 0 018-2.828A4.5 4.5 0 0118 7.5c0 2.852-2.044 5.233-3.885 6.82a22.049 22.049 0 01-3.744 2.582l-.019.01-.005.003h-.002a.739.739 0 01-.69.001l-.002-.001z" />
+                          </svg>
 
-                        <div>{post.like_count}</div>
+                          <div>{post.like_count}</div>
+                        </div>
+                        <div className="flex space-x-0.5">
+                          <div>
+                            {/* <svg
+                              className="w-5 h-5 fill-neutral-600 dark:fill-neutral-300"
+                              viewBox="0 0 24 24"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <g id="Line">
+                                <path d="M12,23a8,8,0,0,1-8-8A9.55,9.55,0,0,1,6.12,9.07,12.25,12.25,0,0,0,8.67,1.94a1,1,0,0,1,1.42-.85,10.24,10.24,0,0,1,6.14,8.38,5.57,5.57,0,0,0,.59-1,1,1,0,0,1,.8-.65,1,1,0,0,1,.95.41C18.72,8.41,20,10.33,20,15A7.91,7.91,0,0,1,12,23ZM10.51,3.6a14.22,14.22,0,0,1-2.73,6.6A7.52,7.52,0,0,0,6,15a6,6,0,0,0,6,6,5.87,5.87,0,0,0,6-6,16.14,16.14,0,0,0-.44-4A7.93,7.93,0,0,1,15.7,12.7a1,1,0,0,1-1.53-1A7.76,7.76,0,0,0,10.51,3.6Z" />
+                              </g>
+                            </svg> */}
+
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                              fill="currentColor"
+                              className="w-5 h-5"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M12.963 2.286a.75.75 0 00-1.071-.136 9.742 9.742 0 00-3.539 6.177A7.547 7.547 0 016.648 6.61a.75.75 0 00-1.152-.082A9 9 0 1015.68 4.534a7.46 7.46 0 01-2.717-2.248zM15.75 14.25a3.75 3.75 0 11-7.313-1.172c.628.465 1.35.81 2.133 1a5.99 5.99 0 011.925-3.545 3.75 3.75 0 013.255 3.717z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </div>
+
+                          <div>{post.views}</div>
+                        </div>
                       </div>
                       <div>{post.comment_count}개의 댓글</div>
                     </div>
