@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import Router from "./Router";
 import { Dropdown, Ripple, Input, Sidenav, initTE } from "tw-elements";
+import { RecoilRoot } from "recoil";
 
 function App() {
   useEffect(() => {
@@ -12,7 +13,9 @@ function App() {
 
   return (
     <>
-      <Router />
+      <RecoilRoot>
+        <Router />
+      </RecoilRoot>
     </>
   );
 }

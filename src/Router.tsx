@@ -4,6 +4,10 @@ import PostRoute from "./routes/PostRoute";
 import EditRoute from "./routes/EditRoute";
 import EditHomeRoute from "./routes/EditHomeRoute";
 
+import Test from "./routes/Test";
+import Page1 from "./routes/Page1";
+import Page2 from "./routes/Page2";
+
 function Router() {
   return (
     <BrowserRouter>

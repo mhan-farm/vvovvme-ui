@@ -1,6 +1,4 @@
-import Post from "../components/Post";
-
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import CodeMirror from "@uiw/react-codemirror";
 import { markdown, markdownLanguage } from "@codemirror/lang-markdown";
 import { languages } from "@codemirror/language-data";

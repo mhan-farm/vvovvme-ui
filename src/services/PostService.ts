@@ -19,8 +19,17 @@ const getOrderBySortPosts = async (
     });
 };
 
+const getPosts = async (): Promise<Response<Page<Post>>> => {
+  return await HttpService.getAxiosClient()
+    .get<Response<Page<Post>>>(POST_URL, {})
+    .then((response) => {
+      return response.data;
+    });
+};
+
 const PostService = {
   getOrderBySortPosts,
+  getPosts,
 };
 
 export default PostService;
