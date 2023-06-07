@@ -1,15 +1,6 @@
-import {
-  DragDropContext,
-  Draggable,
-  DropResult,
-  Droppable,
-} from "react-beautiful-dnd";
-import PostService from "../services/PostService";
-import { useEffect, useState } from "react";
-import { Post } from "../interface/response/Post";
-import { Link } from "react-router-dom";
+import { DragDropContext, DropResult } from "react-beautiful-dnd";
+
 import { atom, useRecoilState } from "recoil";
-import Page from "./Page";
 import Droppablecontent from "./Droppablecontent";
 
 interface IpageListState {
@@ -26,8 +17,6 @@ const pageListState = atom<IpageListState>({
 });
 
 const SideVar = () => {
-  // const [posts, setPosts] = useState<Post[]>([]);
-
   const [pageList, setPageList] = useRecoilState(pageListState);
 
   // --- Draggable이 Droppable로 드래그 되었을 때 실행되는 이벤트
@@ -74,30 +63,11 @@ const SideVar = () => {
         };
       });
     }
-
-    // setPageList((oldPageList) => {
-    //   const copyPageList = [...oldPageList];
-    //   copyPageList.splice(source.index, 1);
-    //   copyPageList.splice(destination.index, 0, draggableId);
-    //   return copyPageList;
-    // });
   };
-
-  // useEffect(() => {
-  //   PostService.getPosts()
-  //     .then((response) => {
-  //       console.log(response.data);
-  //       const content = response.data.content;
-  //       setPosts(content);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, []);
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <div className="bg-red-100 dark:bg-neutral-900 p-2 w-52 md:w-60 h-full fixed">
+      <div className="bg-neutral-100 dark:bg-neutral-900 p-2 w-52 md:w-60 h-full fixed">
         <div className="flex items-center justify-center space-x-2 text-neutral-600 dark:text-neutral-300 rounded-sm my-3">
           <img
             src="https://mdbcdn.b-cdn.net/img/new/avatars/1.webp"
@@ -107,39 +77,7 @@ const SideVar = () => {
           <div className="text-lg">miruy의 vvovv</div>
         </div>
 
-        {/* <Droppable droppableId="one">
-          {(magic) => (
-            <ul
-              className="flex flex-col p-2 bg-blue-100 dark:bg-neutral-900"
-              ref={magic.innerRef}
-              {...magic.droppableProps}
-            >
-              {posts.map((post, index) => (
-                <Draggable draggableId={`${post.post_id}`} index={index}>
-                  {(magic) => (
-                    <li
-                      className="
-                            bg-neutral-100 hover:bg-neutral-300 active:text-opacity-40 active:bg-opacity-40
-                            dark:bg-neutral-900 dark:hover:bg-neutral-700 dark:active:text-opacity-40 dark:active:bg-opacity-40
-                            text-neutral-600 dark:text-neutral-300 rounded-sm p-0.5"
-                      ref={magic.innerRef}
-                      {...magic.draggableProps}
-                      {...magic.dragHandleProps}
-                    >
-                      <Link to={`/:username/edit/${post.post_id}`}>
-                        {post.title}
-                      </Link>
-                    </li>
-                  )}
-                </Draggable>
-              ))}
-              {magic.placeholder}
-            </ul>
-          )}
-        </Droppable> */}
-
-        {/* recoil test */}
-        <div className="grid grid-rows-3 gap-2 bg-blue-100 p-2">
+        <div className="grid grid-rows-3 gap-2 bg-neutral-100 dark:bg-neutral-900 p-2">
           {Object.keys(pageList).map((pageId) => (
             <Droppablecontent
               pageList={pageList[pageId]}

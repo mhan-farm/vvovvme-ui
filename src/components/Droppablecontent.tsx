@@ -10,18 +10,21 @@ const Droppablecontent = ({ pageList, pageId }: PageListProps) => {
   return (
     <Droppable droppableId={pageId}>
       {(provided, snapshot) => (
-        <div
+        <ul
           {...provided.droppableProps}
           ref={provided.innerRef}
-          className={`flex flex-col p-2 
-          ${snapshot.isDraggingOver ? "bg-yellow-100" : "bg-purple-400"}
+          className={`flex flex-col p-3 
+          ${
+            snapshot.isDraggingOver
+              ? "bg-neutral-200 dark:bg-neutral-800"
+              : "bg-neutral-100 dark:bg-neutral-900"
+          }
           `}
-          // "flex flex-col bg-yellow-100 p-2"
         >
           {pageList.map((page, index) => (
             <Page key={page} page={page} index={index} />
           ))}
-        </div>
+        </ul>
       )}
     </Droppable>
   );
