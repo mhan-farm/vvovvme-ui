@@ -4,6 +4,7 @@ import PostService from "../services/PostService";
 import { Post } from "../interface/response/Post";
 import { Link, useNavigate } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
+import SearchPost from "./SearchPost";
 
 const Posts = () => {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -51,7 +52,10 @@ const Posts = () => {
   return (
     <div className="container my-28 mx-auto">
       <section className="text-gray-800">
-        <SortBtn setSort={getSort} />
+        <div className="flex flex-col items-center space-y-14 w-full mb-5">
+          <SearchPost />
+          <SortBtn setSort={getSort} />
+        </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6 xl:gap-x-12">
           {posts ? (
@@ -119,16 +123,6 @@ const Posts = () => {
                         </div>
                         <div className="flex space-x-0.5">
                           <div>
-                            {/* <svg
-                              className="w-5 h-5 fill-neutral-600 dark:fill-neutral-300"
-                              viewBox="0 0 24 24"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <g id="Line">
-                                <path d="M12,23a8,8,0,0,1-8-8A9.55,9.55,0,0,1,6.12,9.07,12.25,12.25,0,0,0,8.67,1.94a1,1,0,0,1,1.42-.85,10.24,10.24,0,0,1,6.14,8.38,5.57,5.57,0,0,0,.59-1,1,1,0,0,1,.8-.65,1,1,0,0,1,.95.41C18.72,8.41,20,10.33,20,15A7.91,7.91,0,0,1,12,23ZM10.51,3.6a14.22,14.22,0,0,1-2.73,6.6A7.52,7.52,0,0,0,6,15a6,6,0,0,0,6,6,5.87,5.87,0,0,0,6-6,16.14,16.14,0,0,0-.44-4A7.93,7.93,0,0,1,15.7,12.7a1,1,0,0,1-1.53-1A7.76,7.76,0,0,0,10.51,3.6Z" />
-                              </g>
-                            </svg> */}
-
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               viewBox="0 0 24 24"

@@ -35,19 +35,21 @@ const Header = () => {
       >
         <div className="flex w-full h-full items-center">
           <div className="flex w-full h-full justify-between items-center">
-            <div>
+            <div className="flex space-x-4">
               <Link
                 to={"/"}
                 className="text-2xl font-extrabold transition duration-150 ease-in-out text-neutral-600 hover:text-amber-500 active:text-amber-600 focus:text-amber-500 dark:text-neutral-300 dark:hover:text-amber-400 dark:active:text-amber-500 dark:focus:text-amber-400"
               >
                 vvovv me
               </Link>
-            </div>
-            <div className="hidden sm:flex items-center w-1/2">
-              <div className="flex w-full justify-end space-x-4 items-center">
-                <SearchPost />
-                <HandleTheme />
+              <div>
                 <LoginBtn />
+              </div>
+            </div>
+
+            <div className="hidden sm:flex items-center w-1/2">
+              <div className="flex w-full justify-end items-center">
+                <HandleTheme />
               </div>
             </div>
 

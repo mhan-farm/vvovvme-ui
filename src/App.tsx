@@ -7,7 +7,7 @@ function App() {
   useEffect(() => {
     initTE({ Dropdown });
     initTE({ Ripple });
-    initTE({ Input });
+    // initTE({ Input });
     initTE({ Sidenav });
   }, []);
 

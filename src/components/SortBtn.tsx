@@ -13,7 +13,7 @@ const SortBtn = ({ setSort }: sortProps) => {
   };
 
   return (
-    <div className="flex justify-center space-x-2 mb-7">
+    <div className="flex space-x-2 mb-7">
       <div className="flex flex-col">
         {/* <div className="flex bg-neutral-100 px-2 pt-1 items-center rounded-sm">
           <div className="text-xs">최근 작성된 게시글</div>
