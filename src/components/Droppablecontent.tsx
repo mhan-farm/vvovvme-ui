@@ -1,14 +1,15 @@
 import { Droppable } from "react-beautiful-dnd";
-import Page from "./Page";
+import DraggableContent from "./DraggableContent";
+import { PostProps } from "./SideVar";
 
-interface PageListProps {
-  pageList: string[];
-  pageId: string;
+interface DroppableProps {
+  posts: PostProps[];
+  postId: string;
 }
 
-const Droppablecontent = ({ pageList, pageId }: PageListProps) => {
+const DroppableContent = ({ posts, postId }: DroppableProps) => {
   return (
-    <Droppable droppableId={pageId}>
+    <Droppable droppableId={postId}>
       {(provided, snapshot) => (
         <ul
           {...provided.droppableProps}
@@ -17,17 +18,23 @@ const Droppablecontent = ({ pageList, pageId }: PageListProps) => {
           ${
             snapshot.isDraggingOver
               ? "bg-neutral-200 dark:bg-neutral-800"
-              : "bg-neutral-100 dark:bg-neutral-900"
+              : "bg-amber-100 dark:bg-neutral-900"
           }
           `}
         >
-          {pageList.map((page, index) => (
-            <Page key={page} page={page} index={index} />
+          {posts.map((post, index) => (
+            <DraggableContent
+              key={post.id}
+              index={index}
+              postId={post.id}
+              postTitle={post.title}
+            />
           ))}
+          {provided.placeholder}
         </ul>
       )}
     </Droppable>
   );
 };
 
-export default Droppablecontent;
+export default DroppableContent;

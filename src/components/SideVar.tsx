@@ -1,23 +1,32 @@
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
 
 import { atom, useRecoilState } from "recoil";
-import Droppablecontent from "./Droppablecontent";
+import DroppableContent from "./DroppableContent";
 
-interface IpageListState {
-  [key: string]: string[];
+export interface PostProps {
+  id: number;
+  title: string;
 }
 
-const pageListState = atom<IpageListState>({
-  key: "pageList",
+interface PostsProps {
+  [key: string]: PostProps[];
+}
+
+export const postsState = atom<PostsProps>({
+  key: "postsState",
   default: {
-    page1: ["a", "b"],
-    page2: ["c", "d", "e"],
-    page3: ["f"],
+    posts: [
+      { id: 1, title: "aa" },
+      { id: 2, title: "bb" },
+      { id: 3, title: "cc" },
+      { id: 4, title: "dd" },
+      { id: 5, title: "e" },
+    ],
   }, // 초기 페이지 목록
 });
 
 const SideVar = () => {
-  const [pageList, setPageList] = useRecoilState(pageListState);
+  const [posts, setPosts] = useRecoilState(postsState);
 
   // --- Draggable이 Droppable로 드래그 되었을 때 실행되는 이벤트
   const onDragEnd = (result: DropResult) => {
@@ -36,10 +45,13 @@ const SideVar = () => {
 
     // 같은 보드 내에서 이동
     if (destination?.droppableId === source.droppableId) {
-      setPageList((allBoards) => {
+      setPosts((allBoards) => {
         const copyBoard = [...allBoards[source.droppableId]]; // 이동을 원하는 보드 복사
+        const grabObj = copyBoard[source.index]; // * string을 obj로 바꿨으므로 복사한 보드를 삭제하기 전 저장
+
         copyBoard.splice(source.index, 1); // 이동 시작 보드에서 (이동을 원하는)데이터 삭제
-        copyBoard.splice(destination.index, 0, draggableId); // 이동 종료 보드에서 (이동을 원하는) 데이터 추가
+        copyBoard.splice(destination.index, 0, grabObj); // 이동 종료 보드에서 (이동을 원하는) 데이터 추가 / * string인 droppableId을 사용할 수 없으므로 삭제하기 전 저장해놓은 grabObj를 추가
+
         return {
           // 다른 보드들도 같이 붙혀서 새로운 보드 반환
           ...allBoards,
@@ -50,12 +62,15 @@ const SideVar = () => {
 
     // 다른 보드 간 이동
     if (destination.droppableId !== source.droppableId) {
-      setPageList((allBoards) => {
+      setPosts((allBoards) => {
         const copySourceBoard = [...allBoards[source.droppableId]]; // 이동 시작 보드 복사
         const copyDestinationBoard = [...allBoards[destination.droppableId]]; // 이동 종료 보드 복사
 
+        const grabObj = copySourceBoard[source.index]; // * string을 obj로 바꿨으므로 복사한 보드를 삭제하기 전 저장
+
         copySourceBoard.splice(source.index, 1);
-        copyDestinationBoard.splice(destination.index, 0, draggableId);
+        copyDestinationBoard.splice(destination.index, 0, grabObj); // * string인 droppableId을 사용할 수 없으므로 삭제하기 전 저장해놓은 grabObj를 추가
+
         return {
           ...allBoards,
           [source.droppableId]: copySourceBoard,
@@ -77,12 +92,12 @@ const SideVar = () => {
           <div className="text-lg">miruy의 vvovv</div>
         </div>
 
-        <div className="grid grid-rows-3 gap-2 bg-neutral-100 dark:bg-neutral-900 p-2">
-          {Object.keys(pageList).map((pageId) => (
-            <Droppablecontent
-              pageList={pageList[pageId]}
-              pageId={pageId}
-              key={pageId}
+        <div className="grid grid-rows-3 gap-2 bg-red-100 dark:bg-neutral-900 p-2">
+          {Object.keys(posts).map((postId) => (
+            <DroppableContent
+              posts={posts[postId]}
+              postId={postId}
+              key={postId}
             />
           ))}
         </div>
