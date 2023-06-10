@@ -21,10 +21,10 @@ const SearchPost = () => {
 
   return (
     <>
-      <div className="flex w-full justify-center space-x-5">
+      <div className="flex justify-end w-full space-x-4">
         <label
           htmlFor="searchWord"
-          className="flex w-[50%] h-16 text-2xl ml-12 bg-transparent border-2 rounded border-neutral-300 dark:border-neutral-500 outline-none px-3 py-2 leading-[1.6] focus:z-[3] text-neutral-700 dark:text-neutral-200"
+          className="flex w-[10%] md:w-[40%] 2xl:w-[50%] h-10 text-2xl ml-12 bg-transparent border-2 rounded border-neutral-300 dark:border-neutral-500 outline-none px-3 py-2 leading-[1.6] focus:z-[3] text-neutral-700 dark:text-neutral-200"
         >
           <input
             id="searchWord"

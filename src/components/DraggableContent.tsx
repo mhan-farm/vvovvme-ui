@@ -23,8 +23,8 @@ const DraggableContent = ({ postId, postTitle, index }: DroggableProps) => {
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
-          className="bg-green-100 hover:bg-neutral-300 active:bg-opacity-40
-                     dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:active:bg-opacity-40
+          className="bg-neutral-100 hover:bg-neutral-300 active:bg-opacity-50
+                     dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:active:bg-opacity-50
                      text-neutral-600 dark:text-neutral-300 rounded-sm p-0.5"
         >
           <div className="flex items-center justify-between">

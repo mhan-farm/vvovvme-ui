@@ -1,6 +1,7 @@
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import { atom, useRecoilState } from "recoil";
 import DroppableContent from "./DroppableContent";
+import { Link } from "react-router-dom";
 
 export interface PostProps {
   id: number;
@@ -75,7 +76,7 @@ const SideVar = () => {
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="bg-neutral-100 dark:bg-neutral-900 p-2 w-52 md:w-60 h-full fixed">
-        <div className="flex items-center justify-center space-x-2 text-neutral-600 dark:text-neutral-300 rounded-sm my-3">
+        <div className="flex items-center justify-center space-x-2 text-neutral-600 dark:text-neutral-300 rounded-sm mt-3 my-5">
           <img
             src="https://mdbcdn.b-cdn.net/img/new/avatars/1.webp"
             className="w-12 rounded-full shadow-black"
@@ -83,8 +84,38 @@ const SideVar = () => {
           />
           <div className="text-lg">miruy의 vvovv</div>
         </div>
-
-        <div className="grid grid-rows-3 gap-2 bg-red-100 dark:bg-neutral-900 p-2">
+        <div className="flex justify-end">
+          <button
+            type="button"
+            className="flex rounded-full px-2 py-1 text-sm font-medium uppercase leading-normal
+            transition duration-150 ease-in-out hover:bg-neutral-600 hover:bg-opacity-10 focus:outline-none focus:ring-0
+          text-amber-500 hover:text-amber-600 active:text-amber-700 focus:text-amber-600
+           dark:hover:bg-neutral-100 dark:hover:bg-opacity-10 dark:text-amber-300 dark:hover:text-amber-400 dark:active:text-amber-300 dark:focus:text-amber-300"
+            data-te-ripple-init
+          >
+            <Link
+              to={`/:username/edit`}
+              className="flex space-x-0.5 items-center"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={2}
+                stroke="currentColor"
+                className="w-[1.1rem] h-[1rem]"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 4.5v15m7.5-7.5h-15"
+                />
+              </svg>
+              <div className="text-sm pr-1">새 글 작성</div>
+            </Link>
+          </button>
+        </div>
+        <div className="grid grid-rows-3 gap-2 bg-neutral-100 dark:bg-neutral-900 px-2">
           {Object.keys(posts).map((postId) => (
             <DroppableContent
               posts={posts[postId]}

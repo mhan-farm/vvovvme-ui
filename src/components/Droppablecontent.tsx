@@ -14,11 +14,11 @@ const DroppableContent = ({ posts, postId }: DroppableProps) => {
         <ul
           {...provided.droppableProps}
           ref={provided.innerRef}
-          className={`flex flex-col p-3 
+          className={`flex flex-col 
           ${
             snapshot.isDraggingOver
               ? "bg-neutral-200 dark:bg-neutral-800"
-              : "bg-amber-100 dark:bg-neutral-900"
+              : "bg-neutral-100 dark:bg-neutral-900"
           }
           `}
         >

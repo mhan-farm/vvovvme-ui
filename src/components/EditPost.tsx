@@ -19,23 +19,28 @@ const EditPost = () => {
   console.log("EditPost-topPage info:", topPage);
 
   const savePost = (data: TitleProps) => {
-    // 새로운 post 저장
-    const newPost = {
-      id: location.state.newId,
-      title: data.title,
-    };
-
     // sidevar 배열에 추가
     setPosts((all) => {
-      // 배열복사
-      const copyPosts = [...all.posts];
+      const copyPosts = [...all.posts]; // 배열복사
 
-      // 상위페이지의 다음 인덱스 계산
-      const nextIndex = topPage.topPageIndex + 1;
+      if (topPage !== null) {
+        // 하위페이지 생성
+        const newPost = {
+          id: location.state.newId,
+          title: data.title,
+        };
 
-      // 복사한 배열에 새로운 post 추가
-      copyPosts.splice(nextIndex, 0, newPost);
+        const nextIndex = topPage.topPageIndex + 1; // 상위페이지의 다음 인덱스 계산
+        copyPosts.splice(nextIndex, 0, newPost); // 복사한 배열에 새로운 post 추가
+      } else {
+        // 상위페이지 생성
+        const newPost = {
+          id: Date.now(),
+          title: data.title,
+        };
 
+        copyPosts.splice(copyPosts.length, 0, newPost); // 복사한 배열에 새로운 post 추가
+      }
       return {
         posts: copyPosts,
       };
