@@ -4,9 +4,13 @@ import { markdown, markdownLanguage } from "@codemirror/lang-markdown";
 import { languages } from "@codemirror/language-data";
 import DefaultLayout from "../layouts/DefaultLayout";
 import SideVar from "../components/SideVar";
+import { useLocation } from "react-router-dom";
 
 const EditRoute = () => {
   const [post, setPost] = useState("");
+  const location = useLocation();
+  const prevPost = location.state;
+
   const onChange = useCallback((value: string, viewUpdate: any) => {
     setPost(value);
   }, []);

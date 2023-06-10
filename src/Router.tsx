@@ -8,6 +8,10 @@ function Router() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomeRoute />}></Route>
+        <Route
+          path={`/:username/edit/:postTitle/:newPostId`}
+          element={<EditHomeRoute />}
+        ></Route>
         <Route path={`/:username/edit`} element={<EditHomeRoute />}></Route>
         <Route path={`/:username/edit/:postId`} element={<EditRoute />}></Route>
       </Routes>

@@ -1,5 +1,4 @@
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
-
 import { atom, useRecoilState } from "recoil";
 import DroppableContent from "./DroppableContent";
 
@@ -22,7 +21,7 @@ export const postsState = atom<PostsProps>({
       { id: 4, title: "dd" },
       { id: 5, title: "e" },
     ],
-  }, // 초기 페이지 목록
+  },
 });
 
 const SideVar = () => {
@@ -32,13 +31,6 @@ const SideVar = () => {
   const onDragEnd = (result: DropResult) => {
     console.log(result); // 이동 데이터 정보
     const { destination, source, draggableId } = result;
-    {
-      /* 
-      source : 이동을 시작하는 데이터
-      destination : 이동을 종료하는 데이터
-      draggableId : 보드 Id
-    */
-    }
 
     // 이동이 없으면 기존 데이터를 반환
     if (!destination) return;

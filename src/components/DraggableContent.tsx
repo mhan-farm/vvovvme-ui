@@ -1,5 +1,5 @@
 import { Draggable } from "react-beautiful-dnd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 interface DroggableProps {
   postId: number;
@@ -8,6 +8,14 @@ interface DroggableProps {
 }
 
 const DraggableContent = ({ postId, postTitle, index }: DroggableProps) => {
+  const navigate = useNavigate();
+  const newPostId = Date.now();
+  const createSubpage = () => {
+    navigate(`/:username/edit/${postTitle}/${newPostId}`, {
+      state: { newId: newPostId, topPageIndex: index },
+    });
+  };
+
   return (
     <Draggable draggableId={postId + ""} index={index}>
       {(provided) => (
@@ -20,8 +28,8 @@ const DraggableContent = ({ postId, postTitle, index }: DroggableProps) => {
                      text-neutral-600 dark:text-neutral-300 rounded-sm p-0.5"
         >
           <div className="flex items-center justify-between">
-            <h2>{postTitle}</h2>
-            <Link to={"/:username/edit"}>
+            <Link to={`/:username/edit/${postTitle}`}>{postTitle}</Link>
+            <div onClick={createSubpage}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -36,7 +44,7 @@ const DraggableContent = ({ postId, postTitle, index }: DroggableProps) => {
                   d="M12 4.5v15m7.5-7.5h-15"
                 />
               </svg>
-            </Link>
+            </div>
           </div>
         </li>
       )}
