@@ -50,11 +50,11 @@ const Posts = () => {
   };
 
   return (
-    <div className="container my-28 mx-auto">
+    <div className="container my-32 mx-auto">
       <section className="text-gray-800">
-        <div className="flex justify-between items-center w-full mb-5">
-          <SortBtn setSort={getSort} />
+        <div className="flex flex-col w-full mb-3">
           <SearchPost />
+          <SortBtn setSort={getSort} />
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6 xl:gap-x-12">

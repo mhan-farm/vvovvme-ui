@@ -2,68 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.stretchLeft{
-	animation-name: stretchLeft;
-	-webkit-animation-name: stretchLeft;	
-
-	animation-duration: 1.5s;	
-	-webkit-animation-duration: 1.5s;
-
-	animation-timing-function: ease-out;	
-	-webkit-animation-timing-function: ease-out;	
-
-	transform-origin: 100% 0%;
-	-ms-transform-origin: 100% 0%;
-	-webkit-transform-origin: 100% 0%; 
-}
-
-@keyframes stretchLeft {
-	0% {
-		transform: scaleX(0.3);
-	}
-	40% {
-		transform: scaleX(1.02);
-	}
-	60% {
-		transform: scaleX(0.98);
-	}
-	80% {
-		transform: scaleX(1.01);
-	}
-	100% {
-		transform: scaleX(0.98);
-	}				
-	80% {
-		transform: scaleX(1.01);
-	}
-	100% {
-		transform: scaleX(1);
-	}							
-}
-
-@-webkit-keyframes stretchLeft {
-	0% {
-		-webkit-transform: scaleX(0.3);
-	}
-	40% {
-		-webkit-transform: scaleX(1.02);
-	}
-	60% {
-		-webkit-transform: scaleX(0.98);
-	}
-	80% {
-		-webkit-transform: scaleX(1.01);
-	}
-	100% {
-		-webkit-transform: scaleX(0.98);
-	}				
-	80% {
-		-webkit-transform: scaleX(1.01);
-	}
-	100% {
-		-webkit-transform: scaleX(1);
-	}		
-}
 
 /* Float */
 .hvr-float {
@@ -73,15 +11,15 @@
 	transform: perspective(1px) translateZ(0);
 	box-shadow: 0 0 1px rgba(0, 0, 0, 0);
 	-webkit-transition-duration: 0.3s;
-	transition-duration: 0.3s;
+	transition-duration: 0.5s;
 	-webkit-transition-property: transform;
 	transition-property: transform;
 	-webkit-transition-timing-function: ease-out;
 	transition-timing-function: ease-out;
   }
   .hvr-float:hover, .hvr-float:focus, .hvr-float:active {
-	-webkit-transform: translateY(-8px);
-	transform: translateY(-8px);
+	-webkit-transform: translateY(-5px);
+	transform: translateY(-5px);
   }
 
  
