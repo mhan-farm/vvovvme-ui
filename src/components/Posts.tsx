@@ -10,7 +10,7 @@ const Posts = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const size = 12;
   const [page, setPage] = useState<number>(0);
-  const [sort, setSort] = useState<string>("created");
+  const [sort, setSort] = useState<string>("created,DESC");
   const [ref, inView] = useInView();
   const navigate = useNavigate();
 
@@ -35,7 +35,11 @@ const Posts = () => {
   }, [inView]);
 
   const getSort = (sort: string) => {
-    setSort(sort);
+    if (sort === "created") {
+      setSort("created,DESC");
+    } else {
+      setSort(sort);
+    }
   };
 
   useEffect(() => {

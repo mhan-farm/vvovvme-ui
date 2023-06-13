@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useSetRecoilState } from "recoil";
-import SideVar, { postsState } from "./SideVar";
+import SideVar from "./SideVar";
 import { useLocation, useNavigate } from "react-router-dom";
 
 interface TitleProps {
@@ -10,7 +10,6 @@ interface TitleProps {
 
 const EditPost = () => {
   const { register, setValue, handleSubmit } = useForm<TitleProps>();
-  const setPosts = useSetRecoilState(postsState);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -20,31 +19,33 @@ const EditPost = () => {
 
   const savePost = (data: TitleProps) => {
     // sidevar 배열에 추가
-    setPosts((all) => {
-      const copyPosts = [...all.posts]; // 배열복사
+    // setPosts((all) => {
+    //   const copyPosts = [...all.posts]; // 배열복사
 
-      if (topPage !== null) {
-        // 하위페이지 생성
-        const newPost = {
-          id: location.state.newId,
-          title: data.title,
-        };
+    //   if (topPage !== null) {
+    //     // 하위페이지 생성
+    //     const newPost = {
+    //       id: location.state.newId,
+    //       title: data.title,
+    //       subPosts: [],
+    //     };
 
-        const nextIndex = topPage.topPageIndex + 1; // 상위페이지의 다음 인덱스 계산
-        copyPosts.splice(nextIndex, 0, newPost); // 복사한 배열에 새로운 post 추가
-      } else {
-        // 상위페이지 생성
-        const newPost = {
-          id: Date.now(),
-          title: data.title,
-        };
+    //     const nextIndex = topPage.topPageIndex + 1; // 상위페이지의 다음 인덱스 계산
+    //     copyPosts.splice(nextIndex, 0, newPost); // 복사한 배열에 새로운 post 추가
+    //   } else {
+    //     // 상위페이지 생성
+    //     const newPost = {
+    //       id: Date.now(),
+    //       title: data.title,
+    //       subPosts: [],
+    //     };
 
-        copyPosts.splice(copyPosts.length, 0, newPost); // 복사한 배열에 새로운 post 추가
-      }
-      return {
-        posts: copyPosts,
-      };
-    });
+    //     copyPosts.splice(copyPosts.length, 0, newPost); // 복사한 배열에 새로운 post 추가
+    //   }
+    //   return {
+    //     posts: copyPosts,
+    //   };
+    // });
 
     setValue("title", "");
     navigate(`/:username/edit/${data.title}`, {
@@ -54,7 +55,6 @@ const EditPost = () => {
 
   return (
     <>
-      <SideVar />
       <div className="mt-20 mx-auto">
         <form onSubmit={handleSubmit(savePost)}>
           <input {...register("title")} type="text" placeholder="제목" />

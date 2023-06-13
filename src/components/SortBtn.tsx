@@ -10,7 +10,7 @@ const SortBtn = ({ setSort }: sortProps) => {
   const [sortTitle, setSortTitle] = useState<string>("");
 
   const handleSort = (sortData: string) => {
-    setSort(sortData + ",DESC");
+    setSort(sortData);
     setSortData(sortData);
   };
 
@@ -29,20 +29,20 @@ const SortBtn = ({ setSort }: sortProps) => {
         {hover ? (
           <>
             {sortTitle === "created" ? (
-              <div className="flex bg-neutral-100 px-2 pt-1 items-center rounded-sm mr-[6rem]">
-                <div className="text-xs">최근 작성</div>
+              <div className="flex bg-neutral-100 dark:bg-neutral-300 px-2 pt-1 pb-0.5 mb-1.5 items-center rounded-sm mr-[5.6rem]">
+                <div className="text-xs">최근 작성 순</div>
               </div>
             ) : null}
 
             {sortTitle === "likes" ? (
-              <div className="flex bg-neutral-100 px-2 pt-1 items-center rounded-sm mr-[3.7rem]">
-                <div className="text-xs">좋아요</div>
+              <div className="flex bg-neutral-100 dark:bg-neutral-300 px-2 pt-1 pb-0.5 mb-1.5 items-center rounded-sm mr-[3.2rem]">
+                <div className="text-xs">좋아요 순</div>
               </div>
             ) : null}
 
             {sortTitle === "views" ? (
-              <div className="flex bg-neutral-100 px-2 pt-1 items-center rounded-sm mr-[1rem]">
-                <div className="text-xs">조회수</div>
+              <div className="flex bg-neutral-100 dark:bg-neutral-300 px-2 pt-1 pb-0.5 mb-1.5 items-center rounded-sm mr-[0.5rem]">
+                <div className="text-xs">조회수 순</div>
               </div>
             ) : null}
           </>

@@ -29,7 +29,7 @@ const getPosts = async (): Promise<Response<Page<Post>>> => {
 
 const PostService = {
   getOrderBySortPosts,
-  getPosts,
+  // getPosts,
 };
 
 export default PostService;

@@ -1,130 +1,47 @@
-import { DragDropContext, DropResult } from "react-beautiful-dnd";
-import { atom, useRecoilState } from "recoil";
+import {
+  DragDropContext,
+  Draggable,
+  DropResult,
+  Droppable,
+} from "react-beautiful-dnd";
 import DroppableContent from "./DroppableContent";
-import { Link } from "react-router-dom";
+import { TestPost, postsState } from "../atom/atoms";
+import { useRecoilState } from "recoil";
 
-export interface PostProps {
-  id: number;
-  title: string;
-}
+const SideVar: React.FC = () => {
+  const [posts, setPosts] = useRecoilState<TestPost[]>(postsState);
 
-interface PostsProps {
-  [key: string]: PostProps[];
-}
-
-export const postsState = atom<PostsProps>({
-  key: "postsState",
-  default: {
-    posts: [
-      { id: 1, title: "aa" },
-      { id: 2, title: "bb" },
-      { id: 3, title: "cc" },
-      { id: 4, title: "dd" },
-      { id: 5, title: "e" },
-    ],
-  },
-});
-
-const SideVar = () => {
-  const [posts, setPosts] = useRecoilState(postsState);
-
-  // --- Draggable이 Droppable로 드래그 되었을 때 실행되는 이벤트
-  const onDragEnd = (result: DropResult) => {
-    console.log(result); // 이동 데이터 정보
-    const { destination, source, draggableId } = result;
-
-    // 이동이 없으면 기존 데이터를 반환
-    if (!destination) return;
-
-    // 같은 보드 내에서 이동
-    if (destination?.droppableId === source.droppableId) {
-      setPosts((allBoards) => {
-        const copyBoard = [...allBoards[source.droppableId]]; // 이동을 원하는 보드 복사
-        const grabObj = copyBoard[source.index]; // * string을 obj로 바꿨으므로 복사한 보드를 삭제하기 전 저장
-
-        copyBoard.splice(source.index, 1); // 이동 시작 보드에서 (이동을 원하는)데이터 삭제
-        copyBoard.splice(destination.index, 0, grabObj); // 이동 종료 보드에서 (이동을 원하는) 데이터 추가 / * string인 droppableId을 사용할 수 없으므로 삭제하기 전 저장해놓은 grabObj를 추가
-
-        return {
-          // 다른 보드들도 같이 붙혀서 새로운 보드 반환
-          ...allBoards,
-          [source.droppableId]: copyBoard,
-        };
-      });
-    }
-
-    // 다른 보드 간 이동
-    if (destination.droppableId !== source.droppableId) {
-      setPosts((allBoards) => {
-        const copySourceBoard = [...allBoards[source.droppableId]]; // 이동 시작 보드 복사
-        const copyDestinationBoard = [...allBoards[destination.droppableId]]; // 이동 종료 보드 복사
-
-        const grabObj = copySourceBoard[source.index]; // * string을 obj로 바꿨으므로 복사한 보드를 삭제하기 전 저장
-
-        copySourceBoard.splice(source.index, 1);
-        copyDestinationBoard.splice(destination.index, 0, grabObj); // * string인 droppableId을 사용할 수 없으므로 삭제하기 전 저장해놓은 grabObj를 추가
-
-        return {
-          ...allBoards,
-          [source.droppableId]: copySourceBoard,
-          [destination.droppableId]: copyDestinationBoard,
-        };
-      });
-    }
-  };
+  const handleDragEnd = (result: DropResult) => {};
 
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      <div className="bg-neutral-100 dark:bg-neutral-900 p-2 w-52 md:w-60 h-full fixed">
-        <div className="flex items-center justify-center space-x-2 text-neutral-600 dark:text-neutral-300 rounded-sm mt-3 my-5">
-          <img
-            src="https://mdbcdn.b-cdn.net/img/new/avatars/1.webp"
-            className="w-12 rounded-full shadow-black"
-            alt="Avatar"
-          />
-          <div className="text-lg">miruy의 vvovv</div>
-        </div>
-        <div className="flex justify-end">
-          <button
-            type="button"
-            className="flex rounded-full px-2 py-1 text-sm font-medium uppercase leading-normal
-            transition duration-150 ease-in-out hover:bg-neutral-600 hover:bg-opacity-10 focus:outline-none focus:ring-0
-          text-amber-500 hover:text-amber-600 active:text-amber-700 focus:text-amber-600
-           dark:hover:bg-neutral-100 dark:hover:bg-opacity-10 dark:text-amber-300 dark:hover:text-amber-400 dark:active:text-amber-300 dark:focus:text-amber-300"
-            data-te-ripple-init
+    <DragDropContext onDragEnd={handleDragEnd}>
+      <Droppable droppableId="top-page" direction="horizontal" type="POST">
+        {(provided) => (
+          <div
+            {...provided.droppableProps}
+            ref={provided.innerRef}
+            className="bg-red-200 p-5 h-96"
           >
-            <Link
-              to={`/:username/edit`}
-              className="flex space-x-0.5 items-center"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={2}
-                stroke="currentColor"
-                className="w-[1.1rem] h-[1rem]"
+            {posts.map((post, index) => (
+              <Draggable
+                key={post.id}
+                draggableId={"post-" + post.id}
+                index={index}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 4.5v15m7.5-7.5h-15"
-                />
-              </svg>
-              <div className="text-sm pr-1">새 글 작성</div>
-            </Link>
-          </button>
-        </div>
-        <div className="grid grid-rows-3 gap-2 bg-neutral-100 dark:bg-neutral-900 px-2">
-          {Object.keys(posts).map((postId) => (
-            <DroppableContent
-              posts={posts[postId]}
-              postId={postId}
-              key={postId}
-            />
-          ))}
-        </div>
-      </div>
+                {(provided, snapshot) => (
+                  <DroppableContent
+                    post={post}
+                    topProvided={provided}
+                    isHovering={snapshot.isDragging}
+                  />
+                )}
+              </Draggable>
+            ))}
+
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
     </DragDropContext>
   );
 };

@@ -1,37 +1,34 @@
-import { Droppable } from "react-beautiful-dnd";
+import { DraggableProvided, Droppable } from "react-beautiful-dnd";
+import { TestPost } from "../atom/atoms";
 import DraggableContent from "./DraggableContent";
-import { PostProps } from "./SideVar";
 
-interface DroppableProps {
-  posts: PostProps[];
-  postId: string;
+interface IDroppableContent {
+  post: TestPost;
+  topProvided: DraggableProvided;
+  isHovering: boolean;
 }
 
-const DroppableContent = ({ posts, postId }: DroppableProps) => {
+const DroppableContent = ({
+  post,
+  topProvided,
+  isHovering,
+}: IDroppableContent) => {
   return (
-    <Droppable droppableId={postId}>
+    <Droppable droppableId={"post-" + post.id} type="POST">
       {(provided, snapshot) => (
-        <ul
-          {...provided.droppableProps}
-          ref={provided.innerRef}
-          className={`flex flex-col 
-          ${
-            snapshot.isDraggingOver
-              ? "bg-neutral-200 dark:bg-neutral-800"
-              : "bg-neutral-100 dark:bg-neutral-900"
-          }
-          `}
-        >
-          {posts.map((post, index) => (
-            <DraggableContent
-              key={post.id}
-              index={index}
-              postId={post.id}
-              postTitle={post.title}
-            />
-          ))}
-          {provided.placeholder}
-        </ul>
+        <div ref={topProvided.innerRef} {...topProvided.draggableProps}>
+          <div>{post.title}</div>
+          <div ref={provided.innerRef} {...provided.droppableProps}>
+            {post.subPosts.map((subPost, index) => (
+              <DraggableContent
+                subPost={subPost}
+                key={subPost.id}
+                index={index}
+              />
+            ))}
+            {provided.placeholder}
+          </div>
+        </div>
       )}
     </Droppable>
   );
