@@ -4,8 +4,8 @@ const SearchPost = () => {
   const [searchWord, setSearchWord] = useState<string>("");
   const [searchState, setSearchState] = useState<boolean>(false);
 
-  const searchPost = () => {
-    console.log("searching..");
+  const searchPost = (searchWord: string) => {
+    console.log("searching..", searchWord);
   };
 
   const deleteSeacrhWord = () => {
@@ -81,7 +81,9 @@ const SearchPost = () => {
         </label>
 
         <button
-          onClick={searchPost}
+          onClick={() => {
+            searchPost(searchWord);
+          }}
           type="button"
           className="flex rounded-full w-10 h-10 px-2 py-1
             transition duration-150 ease-in-out hover:bg-neutral-600 hover:bg-opacity-10 focus:outline-none focus:ring-0

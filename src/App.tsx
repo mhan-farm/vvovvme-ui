@@ -1,6 +1,13 @@
 import { useEffect } from "react";
 import Router from "./Router";
-import { Dropdown, Ripple, Collapse, Sidenav, initTE } from "tw-elements";
+import {
+  Dropdown,
+  Ripple,
+  Collapse,
+  Sidenav,
+  initTE,
+  Select,
+} from "tw-elements";
 import { RecoilRoot } from "recoil";
 
 function App() {
@@ -9,6 +16,7 @@ function App() {
     initTE({ Ripple });
     initTE({ Collapse });
     initTE({ Sidenav });
+    initTE({ Select });
   }, []);
 
   return (

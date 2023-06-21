@@ -20,19 +20,11 @@ const Posts = () => {
         console.log(response.data);
         const content = response.data.content;
         setPosts([...posts, ...content]);
-        setPage((before) => before + 1);
       })
       .catch((error) => {
         console.log(error);
       });
   };
-
-  useEffect(() => {
-    if (inView) {
-      console.log("inview만 변경");
-      getPosts();
-    }
-  }, [inView]);
 
   const getSort = (sort: string) => {
     if (sort === "created") {
@@ -42,16 +34,28 @@ const Posts = () => {
     }
   };
 
+  const postDetail = (post_id: number) => {
+    navigate(`/:username/edit/${post_id}`);
+  };
+
+  {
+    /* 정렬버튼에 따른 게시글 불러오기 */
+  }
   useEffect(() => {
     setPosts([]);
     setPage(0);
     getPosts();
-    console.log("sort만 변경");
   }, [sort]);
 
-  const postDetail = (post_id: number) => {
-    navigate(`/${post_id}`);
-  };
+  {
+    /* 무한스크롤에 따른 게시글 불러오기 */
+  }
+  useEffect(() => {
+    if (inView) {
+      setPage((before) => before + 1);
+      getPosts();
+    }
+  }, [inView]);
 
   return (
     <div className="container my-32 mx-auto">
