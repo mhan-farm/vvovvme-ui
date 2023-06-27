@@ -39,7 +39,7 @@ const ToolBarMenu = ({ setItem, selectedText }: ToolBarMeuProps) => {
       <div className="px-3 text-neutral-300">|</div>
 
       <div className="flex mb-1 items-center space-x-2 2xl:space-x-5">
-        <Color />
+        <Color setItem={setItem} selectedText={selectedText} />
         <Bold setItem={setItem} selectedText={selectedText} />
         <Itailc setItem={setItem} selectedText={selectedText} />
         <Strikethrough
@@ -53,8 +53,8 @@ const ToolBarMenu = ({ setItem, selectedText }: ToolBarMeuProps) => {
         <div className="px-3 text-neutral-300">|</div>
 
         <UplodeLink setItem={setItem} />
-        <UplodeImage />
-        <UplodeVideo />
+        <UplodeImage setItem={setItem} />
+        <UplodeVideo setItem={setItem} />
         <CodeBlock setItem={setItem} selectedText={selectedText} />
         <Quote
           setItem={setItem}

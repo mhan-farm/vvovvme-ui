@@ -1,13 +1,21 @@
 import { useEffect, useRef, useState } from "react";
 import ColorPicker from "./ColorPicker";
 
-const Color = () => {
+interface ColorProps {
+  setItem: (item: string) => void;
+  selectedText: string;
+}
+
+const Color = ({ setItem, selectedText }: ColorProps) => {
   const [colorPicker, setColorPicker] = useState<boolean>(false);
   const colorRef = useRef<HTMLButtonElement>(null);
 
   const setColor = (color: string) => {
-    console.log(color);
-    //interface 랑 props 가져와서 기존 기능 구현하기
+    if (selectedText) {
+      setItem(`<span style="color: ` + color + `">` + selectedText + `</span>`);
+    } else {
+      setItem(`<span style="color: ` + color + `"></span>`);
+    }
   };
 
   // colorPicker 외부 영역 클릭 시 닫기

@@ -1,14 +1,32 @@
-const UplodeImage = () => {
+interface UplodeImageProps {
+  setItem: (item: string) => void;
+}
+
+const UplodeImage = ({ setItem }: UplodeImageProps) => {
+  const setImage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const target = event.currentTarget;
+    const file = (target.files as FileList)[0];
+    console.log(file);
+    setItem("![" + file.name + "](이미지가 저장되는 경로 - 미구현)");
+  };
+
   return (
-    <button className="py-2 px-2 rounded-sm fill-neutral-700 hover:fill-amber-500">
-      <svg
-        className="w-6 h-6 2xl:w-9 2xl:h-9"
-        viewBox="0 0 20 20"
-        xmlns="http://www.w3.org/2000/svg"
+    <div>
+      <label
+        htmlFor="image"
+        className="flex p-2 rounded-sm fill-neutral-700 hover:fill-amber-500"
       >
-        <path d="M0 4c0-1.1.9-2 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm11 9l-3-3-6 6h16l-5-5-2 2zm4-4a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
-      </svg>
-    </button>
+        <svg
+          className="w-6 h-6 2xl:w-9 2xl:h-9"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M0 4c0-1.1.9-2 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm11 9l-3-3-6 6h16l-5-5-2 2zm4-4a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
+        </svg>
+      </label>
+
+      <input className="hidden" id="image" type="file" onChange={setImage} />
+    </div>
   );
 };
 
