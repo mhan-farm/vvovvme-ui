@@ -1,16 +1,16 @@
-import EditPost from "../components/EditPost";
+import CreatePost from "../components/CreatePost";
 import SideVar from "../components/SideVar";
 import DefaultLayout from "../layouts/DefaultLayout";
 
-const EditPostRoute = () => {
+const CreatePostRoute = () => {
   return (
     <DefaultLayout>
       <div className="flex-1 flex">
         <SideVar />
-        <EditPost />
+        <CreatePost />
       </div>
     </DefaultLayout>
   );
 };
 
-export default EditPostRoute;
+export default CreatePostRoute;

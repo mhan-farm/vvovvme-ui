@@ -1,67 +1,60 @@
-import { useForm } from "react-hook-form";
-import { useSetRecoilState } from "recoil";
-import SideVar from "./SideVar";
-import { useLocation, useNavigate } from "react-router-dom";
-
-interface TitleProps {
-  id: number;
-  title: string;
-}
+import React, { useCallback, useEffect, useState } from "react";
+import CodeMirror from "@uiw/react-codemirror";
+import { markdown, markdownLanguage } from "@codemirror/lang-markdown";
+import { languages } from "@codemirror/language-data";
+import ToolBarMenu from "./ToolBarMenu";
 
 const EditPost = () => {
-  const { register, setValue, handleSubmit } = useForm<TitleProps>();
+  const [post, setPost] = useState("");
+  const [item, setItem] = useState<string>("");
+  const [selectedText, setSelectedText] = useState<string>("");
 
-  const navigate = useNavigate();
-  const location = useLocation();
-  const topPage = location.state; // 상위페이지
+  const onChange = useCallback((value: string, viewUpdate: any) => {
+    setPost(value);
+  }, []);
 
-  console.log("EditPost-topPage info:", topPage);
-
-  const savePost = (data: TitleProps) => {
-    // sidevar 배열에 추가
-    // setPosts((all) => {
-    //   const copyPosts = [...all.posts]; // 배열복사
-
-    //   if (topPage !== null) {
-    //     // 하위페이지 생성
-    //     const newPost = {
-    //       id: location.state.newId,
-    //       title: data.title,
-    //       subPosts: [],
-    //     };
-
-    //     const nextIndex = topPage.topPageIndex + 1; // 상위페이지의 다음 인덱스 계산
-    //     copyPosts.splice(nextIndex, 0, newPost); // 복사한 배열에 새로운 post 추가
-    //   } else {
-    //     // 상위페이지 생성
-    //     const newPost = {
-    //       id: Date.now(),
-    //       title: data.title,
-    //       subPosts: [],
-    //     };
-
-    //     copyPosts.splice(copyPosts.length, 0, newPost); // 복사한 배열에 새로운 post 추가
-    //   }
-    //   return {
-    //     posts: copyPosts,
-    //   };
-    // });
-
-    setValue("title", "");
-    navigate(`/:username/edit/${data.title}`, {
-      state: topPage,
-    });
+  const savePostOnClick = (value: string) => {
+    console.log(value);
+    console.log("save");
   };
 
+  useEffect(() => {
+    const handleSelectionChange = () => {
+      const selection = document.getSelection();
+      if (selection) {
+        const text = selection.toString();
+        setSelectedText(text);
+      }
+    };
+    document.addEventListener("selectionchange", handleSelectionChange);
+    return () => {
+      document.removeEventListener("selectionchange", handleSelectionChange);
+    };
+  }, []);
+
   return (
-    <>
-      <div className="mt-20 mx-auto">
-        <form onSubmit={handleSubmit(savePost)}>
-          <input {...register("title")} type="text" placeholder="제목" />
-          <button>저장</button>
-        </form>
+    <div className="flex-1 flex w-full min-h-screen">
+      <div className="flex flex-col mx-2 w-full">
+        <ToolBarMenu setItem={setItem} selectedText={selectedText} />
+
+        <CodeMirror
+          className="flex relative justify-center h-full"
+          value={item}
+          width="100%"
+          extensions={[
+            markdown({ base: markdownLanguage, codeLanguages: languages }),
+          ]}
+        />
+
+        <button
+          onClick={() => {
+            savePostOnClick(post);
+          }}
+        >
+          save
+        </button>
       </div>
-    </>
+    </div>
   );
 };
 

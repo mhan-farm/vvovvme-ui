@@ -7,6 +7,7 @@ import {
   Sidenav,
   initTE,
   Select,
+  Modal,
 } from "tw-elements";
 import { RecoilRoot } from "recoil";
 
@@ -17,6 +18,7 @@ function App() {
     initTE({ Collapse });
     initTE({ Sidenav });
     initTE({ Select });
+    initTE({ Modal });
   }, []);
 
   return (
