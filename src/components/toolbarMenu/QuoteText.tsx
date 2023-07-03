@@ -1,25 +1,20 @@
-interface QuoteProps {
-  setItem: (item: string) => void;
-  selectedText: string;
+interface QuoteTextProps {
+  setText: () => void;
   hoverId: string;
   hoverSVG: (id: string) => void;
   leaveSVG: () => void;
 }
 
-const Quote = ({
-  setItem,
-  selectedText,
+const QuoteText = ({
+  setText,
   hoverId,
   hoverSVG,
   leaveSVG,
-}: QuoteProps) => {
+}: QuoteTextProps) => {
   const setQuote = () => {
-    if (selectedText) {
-      setItem("> " + selectedText);
-    } else {
-      setItem("> 텍스트");
-    }
+    setText();
   };
+
   return (
     <button
       onClick={setQuote}
@@ -53,4 +48,4 @@ const Quote = ({
   );
 };
 
-export default Quote;
+export default QuoteText;

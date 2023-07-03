@@ -1,28 +1,22 @@
-interface StrikethroughProps {
-  setItem: (item: string) => void;
-  selectedText: string;
+interface StrikethroughTextProps {
+  setText: () => void;
   hoverId: string;
   hoverSVG: (id: string) => void;
   leaveSVG: () => void;
 }
 
-const Strikethrough = ({
-  setItem,
-  selectedText,
+const StrikethroughText = ({
+  setText,
   hoverId,
   hoverSVG,
   leaveSVG,
-}: StrikethroughProps) => {
-  const setStrikethrough = () => {
-    if (selectedText) {
-      setItem("~~" + selectedText + "~~");
-    } else {
-      setItem("~~텍스트~~");
-    }
+}: StrikethroughTextProps) => {
+  const onClick = () => {
+    setText();
   };
   return (
     <button
-      onClick={setStrikethrough}
+      onClick={onClick}
       className={`py-2 px-1 rounded-sm ${
         hoverId === "strikethrough" ? `stroke-amber-500` : `stroke-neutral-700`
       }`}
@@ -52,4 +46,4 @@ const Strikethrough = ({
   );
 };
 
-export default Strikethrough;
+export default StrikethroughText;

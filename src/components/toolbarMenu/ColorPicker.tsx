@@ -2,22 +2,22 @@ import { useCallback, useState } from "react";
 import { CirclePicker } from "react-color";
 
 interface ColorPickerProps {
-  getColor: (color: string) => void;
+  setText: (color: string) => void;
 }
 
-const ColorPicker = ({ getColor }: ColorPickerProps) => {
+const ColorPicker = ({ setText }: ColorPickerProps) => {
   const [color, setColor] = useState<string>("#000");
 
   const handleColorChange = useCallback(
     (color: string) => {
       setColor(color);
-      getColor(color);
+      setText(color);
     },
     [color]
   );
 
   return (
-    <div className="flex absolute z-10 p-3 rounded-lg bg-neutral-50 shadow-lg">
+    <div className="flex absolute z-10 p-3 rounded-sm bg-neutral-50 shadow-lg">
       <CirclePicker
         className="relative"
         color={color}

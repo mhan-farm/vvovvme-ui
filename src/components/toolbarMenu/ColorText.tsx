@@ -1,23 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import ColorPicker from "./ColorPicker";
 
-interface ColorProps {
-  setItem: (item: string) => void;
-  selectedText: string;
+interface ColorTextProps {
+  setText: (color: string) => void;
 }
 
-const Color = ({ setItem, selectedText }: ColorProps) => {
+const ColorText = ({ setText }: ColorTextProps) => {
   const [colorPicker, setColorPicker] = useState<boolean>(false);
   const colorRef = useRef<HTMLButtonElement>(null);
-
-  const setColor = (color: string) => {
-    if (selectedText) {
-      setItem(`<span style="color: ` + color + `">` + selectedText + `</span>`);
-    } else {
-      setItem(`<span style="color: ` + color + `"></span>`);
-    }
-  };
-
   // colorPicker 외부 영역 클릭 시 닫기
   useEffect(() => {
     const handleOutsideClose = (e: { target: any }) => {
@@ -50,9 +40,9 @@ const Color = ({ setItem, selectedText }: ColorProps) => {
         </svg>
       </button>
 
-      {colorPicker ? <ColorPicker getColor={setColor} /> : null}
+      {colorPicker ? <ColorPicker setText={setText} /> : null}
     </div>
   );
 };
 
-export default Color;
+export default ColorText;

@@ -1,24 +1,19 @@
 import { useState } from "react";
-import Header1 from "./postEditToolbar/Header1";
-import Header4 from "./postEditToolbar/Header4";
-import Header3 from "./postEditToolbar/Header3";
-import Header2 from "./postEditToolbar/Header2";
-import Bold from "./postEditToolbar/Bold";
-import Itailc from "./postEditToolbar/Itailc";
-import Strikethrough from "./postEditToolbar/Strikethrough";
-import Color from "./postEditToolbar/Color";
-import UplodeImage from "./postEditToolbar/UplodeImage";
-import UplodeLink from "./postEditToolbar/UplodeLink";
-import UplodeVideo from "./postEditToolbar/UplodeVideo";
-import CodeBlock from "./postEditToolbar/CodeBlock";
-import Quote from "./postEditToolbar/Quote";
+import CodeBlock from "./toolbarMenu/CodeBlockText";
+import HeaderText from "./toolbarMenu/HeaderText";
+import LinkText from "./toolbarMenu/LinkText";
+import ImageText from "./toolbarMenu/ImageText";
+import QuoteText from "./toolbarMenu/QuoteText";
+import ColorText from "./toolbarMenu/ColorText";
+import BoldText from "./toolbarMenu/BoldText";
+import ItailcText from "./toolbarMenu/ItailcText";
+import StrikethroughText from "./toolbarMenu/StrikethroughText";
 
 interface ToolBarMeuProps {
-  setItem: (item: string) => void;
-  selectedText: string;
+  setText: (text: string, position: number) => void;
 }
 
-const ToolBarMenu = ({ setItem, selectedText }: ToolBarMeuProps) => {
+const ToolBarMenu = ({ setText }: ToolBarMeuProps) => {
   const [hoverId, setHoverId] = useState<string>("");
 
   const hoverSVG = (id: string) => {
@@ -29,36 +24,93 @@ const ToolBarMenu = ({ setItem, selectedText }: ToolBarMeuProps) => {
     setHoverId("");
   };
 
+  const h1Text = () => {
+    const text = "\n# ";
+    setText(text, text.length);
+  };
+
+  const h2Text = () => {
+    const text = "\n## ";
+    setText(text, text.length);
+  };
+
+  const h3Text = () => {
+    const text = "\n### ";
+    setText(text, text.length);
+  };
+
+  const h4Text = () => {
+    const text = "\n#### ";
+    setText(text, text.length);
+  };
+
+  const linkText = (link: string) => {
+    const text = "\n[](" + link + ")";
+    setText(text, text.length);
+  };
+
+  const quoteText = () => {
+    const text = "\n> ";
+    setText(text, text.length);
+  };
+
+  const imageText = (filePath: string) => {
+    const text = `\n![원본이미지](${filePath})`;
+    setText(text, text.length);
+  };
+
+  const codeblockText = (language: string) => {
+    const text = "\n```" + language + "\n\n```";
+    setText(text, text.length - 4);
+  };
+
+  const colorText = (color: string) => {
+    const text = `\n<span style="color: ` + color + `"></span>`;
+    setText(text, text.length);
+  };
+
+  const boldText = () => {
+    const text = "\n**텍스트**";
+    setText(text, text.length);
+  };
+
+  const itailcText = () => {
+    const text = "\n*텍스트*";
+    setText(text, text.length);
+  };
+
+  const strikethroughText = () => {
+    const text = "\n~~텍스트~~";
+    setText(text, text.length);
+  };
+
   return (
     <div className="flex justify-center items-center w-full mt-20 space-x-2 2xl:space-x-5">
-      <Header1 setItem={setItem} selectedText={selectedText} />
-      <Header2 setItem={setItem} selectedText={selectedText} />
-      <Header3 setItem={setItem} selectedText={selectedText} />
-      <Header4 setItem={setItem} selectedText={selectedText} />
+      <HeaderText setText={h1Text} name="H1" />
+      <HeaderText setText={h2Text} name="H2" />
+      <HeaderText setText={h3Text} name="H3" />
+      <HeaderText setText={h4Text} name="H4" />
 
       <div className="px-3 text-neutral-300">|</div>
 
       <div className="flex mb-1 items-center space-x-2 2xl:space-x-5">
-        <Color setItem={setItem} selectedText={selectedText} />
-        <Bold setItem={setItem} selectedText={selectedText} />
-        <Itailc setItem={setItem} selectedText={selectedText} />
-        <Strikethrough
-          setItem={setItem}
-          selectedText={selectedText}
+        <ColorText setText={colorText} />
+        <BoldText setText={boldText} name="B" />
+        <ItailcText setText={itailcText} />
+        <StrikethroughText
+          setText={strikethroughText}
           hoverId={hoverId}
           hoverSVG={hoverSVG}
           leaveSVG={leaveSVG}
         />
 
         <div className="px-3 text-neutral-300">|</div>
-
-        <UplodeLink setItem={setItem} />
-        <UplodeImage setItem={setItem} />
-        <UplodeVideo setItem={setItem} />
-        <CodeBlock setItem={setItem} selectedText={selectedText} />
-        <Quote
-          setItem={setItem}
-          selectedText={selectedText}
+        <LinkText setText={linkText} />
+        <ImageText setText={imageText} />
+        {/* <UplodeVideo setItem={setText} /> */}
+        <CodeBlock setText={codeblockText} />
+        <QuoteText
+          setText={quoteText}
           hoverId={hoverId}
           hoverSVG={hoverSVG}
           leaveSVG={leaveSVG}

@@ -1,13 +1,14 @@
-interface UplodeImageProps {
-  setItem: (item: string) => void;
+interface ImageTextProps {
+  setText: (filePath: string) => void;
 }
 
-const UplodeImage = ({ setItem }: UplodeImageProps) => {
+const ImageText = ({ setText }: ImageTextProps) => {
   const setImage = (event: React.ChangeEvent<HTMLInputElement>) => {
     const target = event.currentTarget;
     const file = (target.files as FileList)[0];
     console.log(file);
-    setItem("![" + file.name + "](이미지가 저장되는 경로 - 미구현)");
+    const exampleUrl = "http://localhost:8080";
+    setText(exampleUrl);
   };
 
   return (
@@ -30,4 +31,4 @@ const UplodeImage = ({ setItem }: UplodeImageProps) => {
   );
 };
 
-export default UplodeImage;
+export default ImageText;

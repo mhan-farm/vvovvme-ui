@@ -1,20 +1,15 @@
-interface ItailcProps {
-  setItem: (item: string) => void;
-  selectedText: string;
+interface ItailcTextProps {
+  setText: () => void;
 }
 
-const Itailc = ({ setItem, selectedText }: ItailcProps) => {
-  const setItailc = () => {
-    if (selectedText) {
-      setItem("*" + selectedText + "*");
-    } else {
-      setItem("*텍스트*");
-    }
+const ItailcText = ({ setText }: ItailcTextProps) => {
+  const onClick = () => {
+    setText();
   };
 
   return (
     <button
-      onClick={setItailc}
+      onClick={onClick}
       className="py-2 px-2 rounded-sm stroke-neutral-700 fill-neutral-700 hover:stroke-amber-500 hover:fill-amber-500"
     >
       <svg
@@ -28,4 +23,4 @@ const Itailc = ({ setItem, selectedText }: ItailcProps) => {
   );
 };
 
-export default Itailc;
+export default ItailcText;
