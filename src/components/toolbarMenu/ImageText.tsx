@@ -1,8 +1,11 @@
+import { useEffect } from "react";
+
 interface ImageTextProps {
   setText: (filePath: string) => void;
+  openImage: boolean;
 }
 
-const ImageText = ({ setText }: ImageTextProps) => {
+const ImageText = ({ setText, openImage }: ImageTextProps) => {
   const setImage = (event: React.ChangeEvent<HTMLInputElement>) => {
     const target = event.currentTarget;
     const file = (target.files as FileList)[0];
@@ -11,11 +14,17 @@ const ImageText = ({ setText }: ImageTextProps) => {
     setText(exampleUrl);
   };
 
+  useEffect(() => {
+    if (openImage) {
+      document.getElementById("openImage")?.click();
+    }
+  }, []);
+
   return (
     <div>
       <label
         htmlFor="image"
-        className="flex p-2 rounded-sm fill-neutral-700 hover:fill-amber-500"
+        className="flex p-2 rounded-sm fill-neutral-700 dark:fill-neutral-300 hover:fill-amber-500 dark:hover:fill-amber-500 cursor-pointer"
       >
         <svg
           className="w-6 h-6 2xl:w-9 2xl:h-9"

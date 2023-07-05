@@ -24,8 +24,8 @@ const CodeBlock = ({ setText }: CodeBlockProps) => {
   ];
 
   const setCodeBlock = (language: string) => {
-    console.log(language);
     setText(language);
+    setSelect(false);
   };
 
   return (
@@ -34,7 +34,7 @@ const CodeBlock = ({ setText }: CodeBlockProps) => {
         onClick={() => {
           setSelect(true);
         }}
-        className="py-2 px-2 fill-neutral-700 hover:fill-amber-500"
+        className="py-2 px-2 fill-neutral-700 dark:fill-neutral-300 hover:fill-amber-500 dark:hover:fill-amber-500"
         type="button"
       >
         <svg
@@ -46,12 +46,12 @@ const CodeBlock = ({ setText }: CodeBlockProps) => {
         </svg>
       </button>
       {select ? (
-        <div className="flex absolute z-10 rounded-sm bg-neutral-50 shadow-lg overflow-auto h-28">
+        <div className="flex absolute z-10 rounded-sm bg-neutral-50 dark:bg-neutral-900 shadow-lg overflow-auto h-28">
           <div className="flex flex-col">
             {languages.map((language, index) => (
               <div
                 key={index}
-                className="py-1 px-4 hover:bg-neutral-200 cursor-pointer"
+                className="py-1 px-4 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-600 cursor-pointer"
                 onClick={() => {
                   setCodeBlock(language);
                 }}

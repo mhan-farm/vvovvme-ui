@@ -50,7 +50,14 @@ const EditPost = () => {
     <div className="flex-1 flex w-full min-h-screen">
       <div className="flex flex-col mx-2 w-full">
         <ToolBarMenu setText={handleAddText} />
+
         <CodeMirror
+          // style={{
+          //   border: "2px solid red",
+          //   borderRadius: "10px",
+          //   textAlign: "center",
+          //   color: "red",
+          // }}
           ref={codeMirrorRef}
           className="flex relative justify-center h-full"
           value={content}

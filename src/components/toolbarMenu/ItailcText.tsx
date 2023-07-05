@@ -10,7 +10,7 @@ const ItailcText = ({ setText }: ItailcTextProps) => {
   return (
     <button
       onClick={onClick}
-      className="py-2 px-2 rounded-sm stroke-neutral-700 fill-neutral-700 hover:stroke-amber-500 hover:fill-amber-500"
+      className="py-2 px-2 rounded-sm stroke-neutral-700 fill-neutral-700 hover:stroke-amber-500 hover:fill-amber-500 dark:stroke-neutral-300 dark:fill-neutral-300 dark:hover:stroke-amber-500 dark:hover:fill-amber-500"
     >
       <svg
         className="w-[1.1rem] h-[1.1rem] 2xl:w-[1.6rem] 2xl:h-[1.6rem]"

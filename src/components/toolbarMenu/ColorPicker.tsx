@@ -17,7 +17,7 @@ const ColorPicker = ({ setText }: ColorPickerProps) => {
   );
 
   return (
-    <div className="flex absolute z-10 p-3 rounded-sm bg-neutral-50 shadow-lg">
+    <div className="flex absolute z-10 p-3 rounded-sm bg-neutral-50 dark:bg-neutral-900 shadow-lg">
       <CirclePicker
         className="relative"
         color={color}
