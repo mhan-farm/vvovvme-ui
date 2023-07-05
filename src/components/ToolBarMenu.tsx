@@ -157,7 +157,11 @@ const ToolBarMenu = ({ setText }: ToolBarMeuProps) => {
           openModal={openModal}
           setOpenModal={setOpenModal}
         />
-        <ImageText setText={imageText} openImage={openImage} />
+        <ImageText
+          setText={imageText}
+          openImage={openImage}
+          setOpenImage={setOpenImage}
+        />
         {/* <UplodeVideo setItem={setText} /> */}
         <CodeBlock setText={codeblockText} />
         <QuoteText

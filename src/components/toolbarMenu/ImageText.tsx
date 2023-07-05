@@ -1,24 +1,33 @@
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface ImageTextProps {
   setText: (filePath: string) => void;
   openImage: boolean;
+  setOpenImage: (openImage: boolean) => void;
 }
 
-const ImageText = ({ setText, openImage }: ImageTextProps) => {
+const ImageText = ({ setText, openImage, setOpenImage }: ImageTextProps) => {
+  const imageRef = useRef<HTMLInputElement>(null);
+  const [imageText, setImageText] = useState<File>();
+
   const setImage = (event: React.ChangeEvent<HTMLInputElement>) => {
     const target = event.currentTarget;
     const file = (target.files as FileList)[0];
     console.log(file);
     const exampleUrl = "http://localhost:8080";
     setText(exampleUrl);
+    setImageText(file);
   };
 
   useEffect(() => {
-    if (openImage) {
-      document.getElementById("openImage")?.click();
+    console.log(openImage);
+    if (imageText === undefined) {
+      setOpenImage(false);
     }
-  }, []);
+    if (openImage) {
+      imageRef.current?.click();
+    }
+  }, [openImage]);
 
   return (
     <div>
@@ -35,7 +44,13 @@ const ImageText = ({ setText, openImage }: ImageTextProps) => {
         </svg>
       </label>
 
-      <input className="hidden" id="image" type="file" onChange={setImage} />
+      <input
+        className="hidden"
+        ref={imageRef}
+        id="image"
+        type="file"
+        onChange={setImage}
+      />
     </div>
   );
 };
