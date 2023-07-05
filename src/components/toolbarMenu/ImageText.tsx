@@ -20,7 +20,6 @@ const ImageText = ({ setText, openImage, setOpenImage }: ImageTextProps) => {
   };
 
   useEffect(() => {
-    console.log(openImage);
     if (imageText === undefined) {
       setOpenImage(false);
     }

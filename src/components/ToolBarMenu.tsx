@@ -111,7 +111,8 @@ const ToolBarMenu = ({ setText }: ToolBarMeuProps) => {
       } else if (event.ctrlKey && event.code === "KeyX") {
         setOpenImage(true);
       } else if (event.ctrlKey && event.code === "KeyC") {
-        // codeblockText();
+        const text = "\n```\n```";
+        setText(text, text.length - 4);
       } else if (event.ctrlKey && event.code === "KeyV") {
         quoteText();
       }
