@@ -128,15 +128,15 @@ const ToolBarMenu = ({ setText }: ToolBarMeuProps) => {
   }, [handleKeyPress]);
 
   return (
-    <div className="flex justify-center items-center w-full mt-20 space-x-2 2xl:space-x-5">
-      <HeaderText setText={h1Text} name="H1" />
-      <HeaderText setText={h2Text} name="H2" />
-      <HeaderText setText={h3Text} name="H3" />
-      <HeaderText setText={h4Text} name="H4" />
+    <div className="flex flex-col w-full justify-center items-center">
+      <div className="flex justify-center items-center mt-20 space-x-2 2xl:space-x-5">
+        <HeaderText setText={h1Text} name="H1" />
+        <HeaderText setText={h2Text} name="H2" />
+        <HeaderText setText={h3Text} name="H3" />
+        <HeaderText setText={h4Text} name="H4" />
 
-      <div className="px-3 text-neutral-400 dark:text-neutral-600">|</div>
+        <div className="px-3 text-neutral-400 dark:text-neutral-600">|</div>
 
-      <div className="flex mb-1 items-center space-x-2 2xl:space-x-5">
         <ColorText
           setText={colorText}
           setColorPicker={setColorPicker}

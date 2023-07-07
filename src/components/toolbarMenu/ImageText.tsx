@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import Tooltips from "./tooltips/Tooltips";
 
 interface ImageTextProps {
   setText: (filePath: string) => void;
@@ -9,6 +10,11 @@ interface ImageTextProps {
 const ImageText = ({ setText, openImage, setOpenImage }: ImageTextProps) => {
   const imageRef = useRef<HTMLInputElement>(null);
   const [imageText, setImageText] = useState<File>();
+  const [shortcutKey, setShortcutKey] = useState<string>("");
+
+  const onHover = () => {
+    setShortcutKey("Ctrl+X");
+  };
 
   const setImage = (event: React.ChangeEvent<HTMLInputElement>) => {
     const target = event.currentTarget;
@@ -29,8 +35,15 @@ const ImageText = ({ setText, openImage, setOpenImage }: ImageTextProps) => {
   }, [openImage]);
 
   return (
-    <div>
+    <div className="flex flex-col relative w-full">
+      <div className="flex relative -left-2.5 -top-9">
+        <Tooltips shortcutKey={shortcutKey} />
+      </div>
       <label
+        onMouseOver={onHover}
+        onMouseOut={() => {
+          setShortcutKey("");
+        }}
         htmlFor="image"
         className="flex p-2 rounded-sm fill-neutral-700 dark:fill-neutral-300 hover:fill-amber-500 dark:hover:fill-amber-500 cursor-pointer"
       >

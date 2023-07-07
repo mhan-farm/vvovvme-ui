@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import Tooltips from "./tooltips/Tooltips";
 
 interface LinkTextProps {
   setText: (text: string) => void;
@@ -10,6 +11,11 @@ const LinkText = ({ setText, openModal, setOpenModal }: LinkTextProps) => {
   const [link, setLink] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null);
   const [modal, setModal] = useState<boolean>(false);
+  const [shortcutKey, setShortcutKey] = useState<string>("");
+
+  const onHover = () => {
+    setShortcutKey("Ctrl+Z");
+  };
 
   const onClick = () => {
     setModal(false);
@@ -36,10 +42,17 @@ const LinkText = ({ setText, openModal, setOpenModal }: LinkTextProps) => {
   }, [openModal]);
 
   return (
-    <div>
+    <div className="flex flex-col relative w-full">
+      <div className="flex relative -left-2.5 -top-9">
+        <Tooltips shortcutKey={shortcutKey} />
+      </div>
       <label
         onClick={() => {
           setModal(true);
+        }}
+        onMouseOver={onHover}
+        onMouseOut={() => {
+          setShortcutKey("");
         }}
         htmlFor="modal"
         className="flex p-2 rounded-sm fill-neutral-700 dark:fill-neutral-300 hover:fill-amber-500 dark:hover:fill-amber-500 cursor-pointer"
@@ -53,8 +66,8 @@ const LinkText = ({ setText, openModal, setOpenModal }: LinkTextProps) => {
         </svg>
       </label>
       {modal ? (
-        <div className="fixed w-full h-screen left-0 top-0 z-50 bg-neutral-400 bg-opacity-50">
-          <div className="flex flex-col relative bg-white mx-[30%] my-[20%] rounded">
+        <div className="fixed w-full h-screen justify-center items-center left-0 top-0 z-50 bg-neutral-400 bg-opacity-50">
+          <div className="flex flex-col relative  bg-white rounded">
             <div className="flex flex-shrink-0 items-center justify-between border-b-2 border-neutral-100 border-opacity-100 pt-3 px-4 pb-2 dark:border-opacity-50">
               {/* Modal title */}
               <div className="font-medium leading-normal text-neutral-800 cursor-auto">

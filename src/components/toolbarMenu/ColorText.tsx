@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import ColorPicker from "./ColorPicker";
+import Tooltips from "./tooltips/Tooltips";
 
 interface ColorTextProps {
   setText: (color: string) => void;
@@ -13,6 +14,11 @@ const ColorText = ({
   colorPicker,
 }: ColorTextProps) => {
   const colorRef = useRef<HTMLButtonElement>(null);
+  const [shortcutKey, setShortcutKey] = useState<string>("");
+
+  const onHover = () => {
+    setShortcutKey("Ctrl+A");
+  };
 
   // colorPicker 외부 영역 클릭 시 닫기
   useEffect(() => {
@@ -26,11 +32,18 @@ const ColorText = ({
   }, []);
 
   return (
-    <div>
+    <div className="flex flex-col relative w-full">
+      <div className="flex relative -left-3 -top-10">
+        <Tooltips shortcutKey={shortcutKey} />
+      </div>
       <button
         ref={colorRef}
         onClick={() => {
           setColorPicker(true);
+        }}
+        onMouseOver={onHover}
+        onMouseOut={() => {
+          setShortcutKey("");
         }}
         className="py-2 px-2 rounded-sm stroke-neutral-700 fill-neutral-700 dark:fill-neutral-300 hover:stroke-amber-500 hover:fill-amber-500 dark:hover:fill-amber-500"
       >

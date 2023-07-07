@@ -25,11 +25,7 @@ module.exports = {
       // => @media (min-width: 1536px) { ... }
     },
     extend: {
-      colors: {
-        'primary': '#BAA333',
-        
-        // 'blue': '#BAA333',
-      }
+
     },
   },
   plugins: [require("tw-elements/dist/plugin"), require("daisyui")],

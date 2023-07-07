@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
+import Tooltips from "./tooltips/Tooltips";
 
 interface CodeBlockProps {
   setText: (language: string) => void;
@@ -23,16 +24,29 @@ const CodeBlock = ({ setText }: CodeBlockProps) => {
     "json",
   ];
 
+  const [shortcutKey, setShortcutKey] = useState<string>("");
+
+  const onHover = () => {
+    setShortcutKey("Ctrl+C");
+  };
+
   const setCodeBlock = (language: string) => {
     setText(language);
     setSelect(false);
   };
 
   return (
-    <div>
+    <div className="flex flex-col relative w-full">
+      <div className="flex relative -left-2.5 -top-9">
+        <Tooltips shortcutKey={shortcutKey} />
+      </div>
       <button
         onClick={() => {
           setSelect(true);
+        }}
+        onMouseOver={onHover}
+        onMouseOut={() => {
+          setShortcutKey("");
         }}
         className="py-2 px-2 fill-neutral-700 dark:fill-neutral-300 hover:fill-amber-500 dark:hover:fill-amber-500"
         type="button"
