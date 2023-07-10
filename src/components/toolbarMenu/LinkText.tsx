@@ -9,7 +9,8 @@ interface LinkTextProps {
 
 const LinkText = ({ setText, openModal, setOpenModal }: LinkTextProps) => {
   const [link, setLink] = useState<string>("");
-  const inputRef = useRef<HTMLInputElement>(null);
+  const linkRef = useRef<HTMLDivElement>(null);
+  const linkLabelRef = useRef<HTMLLabelElement>(null);
   const [modal, setModal] = useState<boolean>(false);
   const [shortcutKey, setShortcutKey] = useState<string>("");
 
@@ -41,12 +42,30 @@ const LinkText = ({ setText, openModal, setOpenModal }: LinkTextProps) => {
     }
   }, [openModal]);
 
+  // modal내에서 외부 영역 클릭 시 모달 닫기
+  useEffect(() => {
+    const handleOutsideClose = (e: { target: any }) => {
+      const clickLabel = document.getElementById("linkLabel");
+      const clickSvg = document.getElementById("linkSvg");
+      if (e.target === clickLabel || e.target === clickSvg) {
+        return;
+      } else if (linkRef && !linkRef.current?.contains(e.target)) {
+        setLink("");
+        setModal(false);
+        setOpenModal(false);
+      }
+    };
+    document.addEventListener("click", handleOutsideClose);
+    return () => document.removeEventListener("click", handleOutsideClose);
+  }, []);
+
   return (
     <div className="flex flex-col relative w-full">
       <div className="flex relative -left-2.5 -top-9">
         <Tooltips shortcutKey={shortcutKey} />
       </div>
       <label
+        id="linkLabel"
         onClick={() => {
           setModal(true);
         }}
@@ -58,6 +77,7 @@ const LinkText = ({ setText, openModal, setOpenModal }: LinkTextProps) => {
         className="flex p-2 rounded-sm fill-neutral-700 dark:fill-neutral-300 hover:fill-amber-500 dark:hover:fill-amber-500 cursor-pointer"
       >
         <svg
+          id="linkSvg"
           className="w-6 h-6 2xl:w-9 2xl:h-9"
           viewBox="0 0 20 20"
           xmlns="http://www.w3.org/2000/svg"
@@ -66,11 +86,14 @@ const LinkText = ({ setText, openModal, setOpenModal }: LinkTextProps) => {
         </svg>
       </label>
       {modal ? (
-        <div className="fixed w-full h-screen justify-center items-center left-0 top-0 z-50 bg-neutral-400 bg-opacity-50">
-          <div className="flex flex-col relative  bg-white rounded">
+        <div className="fixed w-full h-screen left-0 top-0 z-50 bg-neutral-400 bg-opacity-50 px-[33%]">
+          <div
+            ref={linkRef}
+            className="flex flex-col relative bg-white rounded top-20"
+          >
             <div className="flex flex-shrink-0 items-center justify-between border-b-2 border-neutral-100 border-opacity-100 pt-3 px-4 pb-2 dark:border-opacity-50">
               {/* Modal title */}
-              <div className="font-medium leading-normal text-neutral-800 cursor-auto">
+              <div className="font-medium leading-normal text-neutral-800 cursor-default">
                 링크 등록
               </div>
               {/* Modal Close button */}
@@ -104,13 +127,12 @@ const LinkText = ({ setText, openModal, setOpenModal }: LinkTextProps) => {
             <div className="flex justify-center relative p-4 space-x-5">
               <input
                 id="linkInput"
-                ref={inputRef}
                 value={link}
                 onKeyDown={onKeyDown}
                 onChange={onChangeLink}
                 type="text"
                 placeholder="URL을 입력하세요."
-                className="outline-none p-2 w-[80%] placeholder:px-1"
+                className="outline-none p-2 w-[70%] placeholder:px-1"
               />
 
               <button
@@ -118,7 +140,6 @@ const LinkText = ({ setText, openModal, setOpenModal }: LinkTextProps) => {
                 className="ml-1 inline-block rounded-sm px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out bg-amber-400 hover:bg-amber-500 active:bg-amber-500 focus:bg-amber-500 focus:outline-none focus:ring-0"
                 data-te-ripple-init
                 data-te-ripple-color="light"
-                data-te-modal-dismiss
                 onClick={onClick}
               >
                 등록
