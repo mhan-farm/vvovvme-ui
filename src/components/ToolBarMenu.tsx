@@ -90,30 +90,30 @@ const ToolBarMenu = ({ setText }: ToolBarMeuProps) => {
   // 단축키
   const handleKeyPress = useCallback(
     (event: KeyboardEvent) => {
-      if (event.ctrlKey && event.code === "KeyQ") {
+      if (event.ctrlKey && event.key === "1") {
         h1Text();
-      } else if (event.ctrlKey && event.code === "KeyW") {
+      } else if (event.ctrlKey && event.key === "2") {
         h2Text();
-      } else if (event.ctrlKey && event.code === "KeyE") {
+      } else if (event.ctrlKey && event.key === "3") {
         h3Text();
-      } else if (event.ctrlKey && event.code === "KeyR") {
+      } else if (event.ctrlKey && event.key === "4") {
         h4Text();
-      } else if (event.ctrlKey && event.code === "KeyA") {
+      } else if (event.ctrlKey && event.code === "KeyQ") {
         setColorPicker(true);
-      } else if (event.ctrlKey && event.code === "KeyS") {
+      } else if (event.ctrlKey && event.code === "KeyW") {
         boldText();
-      } else if (event.ctrlKey && event.code === "KeyD") {
+      } else if (event.ctrlKey && event.code === "KeyE") {
         itailcText();
-      } else if (event.ctrlKey && event.code === "KeyF") {
+      } else if (event.ctrlKey && event.code === "KeyT") {
         strikethroughText();
-      } else if (event.ctrlKey && event.code === "KeyZ") {
+      } else if (event.ctrlKey && event.code === "KeyY") {
         setOpenModal(true);
-      } else if (event.ctrlKey && event.code === "KeyX") {
+      } else if (event.ctrlKey && event.code === "KeyU") {
         setOpenImage(true);
-      } else if (event.ctrlKey && event.code === "KeyC") {
+      } else if (event.ctrlKey && event.code === "KeyI") {
         const text = "\n```\n```";
         setText(text, text.length - 4);
-      } else if (event.ctrlKey && event.code === "KeyV") {
+      } else if (event.ctrlKey && event.code === "KeyO") {
         quoteText();
       }
     },

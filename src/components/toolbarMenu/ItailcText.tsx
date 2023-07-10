@@ -9,7 +9,7 @@ const ItailcText = ({ setText }: ItailcTextProps) => {
   const [shortcutKey, setShortcutKey] = useState<string>("");
 
   const onHover = () => {
-    setShortcutKey("Ctrl+D");
+    setShortcutKey("Ctrl+E");
   };
 
   const onClick = () => {

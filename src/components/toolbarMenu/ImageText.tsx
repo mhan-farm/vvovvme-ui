@@ -13,7 +13,7 @@ const ImageText = ({ setText, openImage, setOpenImage }: ImageTextProps) => {
   const [shortcutKey, setShortcutKey] = useState<string>("");
 
   const onHover = () => {
-    setShortcutKey("Ctrl+X");
+    setShortcutKey("Ctrl+U");
   };
 
   const setImage = (event: React.ChangeEvent<HTMLInputElement>) => {

@@ -15,13 +15,13 @@ const HeaderText = ({ setText, name }: HeaderTextProps) => {
 
   const onHover = () => {
     if (name === "H1") {
-      setShortcutKey("Ctrl+Q");
+      setShortcutKey("Ctrl+1");
     } else if (name === "H2") {
-      setShortcutKey("Ctrl+W");
+      setShortcutKey("Ctrl+2");
     } else if (name === "H3") {
-      setShortcutKey("Ctrl+E");
+      setShortcutKey("Ctrl+3");
     } else if (name === "H4") {
-      setShortcutKey("Ctrl+R");
+      setShortcutKey("Ctrl+4");
     }
   };
 

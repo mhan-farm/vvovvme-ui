@@ -14,7 +14,7 @@ const BoldText = ({ setText, name }: BoldTextProps) => {
   };
 
   const onHover = () => {
-    setShortcutKey("Ctrl+S");
+    setShortcutKey("Ctrl+W");
   };
 
   return (

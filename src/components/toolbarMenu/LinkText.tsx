@@ -10,12 +10,11 @@ interface LinkTextProps {
 const LinkText = ({ setText, openModal, setOpenModal }: LinkTextProps) => {
   const [link, setLink] = useState<string>("");
   const linkRef = useRef<HTMLDivElement>(null);
-  const linkLabelRef = useRef<HTMLLabelElement>(null);
   const [modal, setModal] = useState<boolean>(false);
   const [shortcutKey, setShortcutKey] = useState<string>("");
 
   const onHover = () => {
-    setShortcutKey("Ctrl+Z");
+    setShortcutKey("Ctrl+Y");
   };
 
   const onClick = () => {

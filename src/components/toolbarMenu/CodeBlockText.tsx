@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Tooltips from "./tooltips/Tooltips";
 
 interface CodeBlockProps {
@@ -7,6 +7,7 @@ interface CodeBlockProps {
 
 const CodeBlock = ({ setText }: CodeBlockProps) => {
   const [select, setSelect] = useState<boolean>(false);
+  const selectRef = useRef<HTMLButtonElement>(null);
   const languages = [
     "java",
     "python",
@@ -27,7 +28,7 @@ const CodeBlock = ({ setText }: CodeBlockProps) => {
   const [shortcutKey, setShortcutKey] = useState<string>("");
 
   const onHover = () => {
-    setShortcutKey("Ctrl+C");
+    setShortcutKey("Ctrl+I");
   };
 
   const setCodeBlock = (language: string) => {
@@ -35,12 +36,24 @@ const CodeBlock = ({ setText }: CodeBlockProps) => {
     setSelect(false);
   };
 
+  // codeBlock 외부 영역 클릭 시 닫기
+  useEffect(() => {
+    const handleOutsideClose = (e: { target: any }) => {
+      if (selectRef && !selectRef.current?.contains(e.target)) {
+        setSelect(false);
+      }
+    };
+    document.addEventListener("click", handleOutsideClose);
+    return () => document.removeEventListener("click", handleOutsideClose);
+  }, []);
+
   return (
     <div className="flex flex-col relative w-full">
       <div className="flex relative -left-2.5 -top-9">
         <Tooltips shortcutKey={shortcutKey} />
       </div>
       <button
+        ref={selectRef}
         onClick={() => {
           setSelect(true);
         }}
@@ -60,7 +73,7 @@ const CodeBlock = ({ setText }: CodeBlockProps) => {
         </svg>
       </button>
       {select ? (
-        <div className="flex absolute z-10 rounded-sm bg-neutral-50 dark:bg-neutral-900 shadow-lg overflow-auto h-28">
+        <div className="flex absolute z-10 mt-[2.6rem] rounded-sm bg-neutral-50 dark:bg-neutral-900 shadow-lg overflow-auto h-28">
           <div className="flex flex-col">
             {languages.map((language, index) => (
               <div

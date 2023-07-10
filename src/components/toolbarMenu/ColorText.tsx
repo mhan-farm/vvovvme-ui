@@ -17,7 +17,7 @@ const ColorText = ({
   const [shortcutKey, setShortcutKey] = useState<string>("");
 
   const onHover = () => {
-    setShortcutKey("Ctrl+A");
+    setShortcutKey("Ctrl+Q");
   };
 
   // colorPicker 외부 영역 클릭 시 닫기

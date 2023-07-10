@@ -17,7 +17,7 @@ const StrikethroughText = ({
   const [shortcutKey, setShortcutKey] = useState<string>("");
 
   const onHover = () => {
-    setShortcutKey("Ctrl+F");
+    setShortcutKey("Ctrl+T");
   };
 
   const onClick = () => {

@@ -17,7 +17,7 @@ const QuoteText = ({
   const [shortcutKey, setShortcutKey] = useState<string>("");
 
   const onHover = () => {
-    setShortcutKey("Ctrl+V");
+    setShortcutKey("Ctrl+O");
   };
 
   const setQuote = () => {
