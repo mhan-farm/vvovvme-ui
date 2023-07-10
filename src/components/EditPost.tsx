@@ -1,12 +1,22 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import ToolBarMenu from "./ToolBarMenu";
+
 import CodeMirror, { ReactCodeMirrorRef } from "@uiw/react-codemirror";
 import { markdown, markdownLanguage } from "@codemirror/lang-markdown";
 import { languages } from "@codemirror/language-data";
-import ToolBarMenu from "./ToolBarMenu";
 import { EditorSelection } from "@codemirror/state";
 
+import "@toast-ui/editor/dist/toastui-editor-viewer.css";
+import { Viewer } from "@toast-ui/react-editor";
+import Prism from "prismjs";
+import "prismjs/themes/prism.css";
+import "@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css";
+import codeSyntaxHighlight from "@toast-ui/editor-plugin-code-syntax-highlight";
+
 const EditPost = () => {
-  const [content, setContent] = useState<string>("12345123213213213213");
+  const [content, setContent] = useState<string>(
+    `<h3> html 헤더 <span style="color:blue";>파란색</span></h3>\n`
+  );
   const [selectedText, setSelectedText] = useState<string>("");
 
   const onChange = (value: string) => {
@@ -66,6 +76,11 @@ const EditPost = () => {
             markdown({ base: markdownLanguage, codeLanguages: languages }),
           ]}
           onChange={onChange}
+        />
+
+        <Viewer
+          plugins={[[codeSyntaxHighlight, { highlighter: Prism }]]}
+          initialValue={content}
         />
       </div>
     </div>
