@@ -15,16 +15,18 @@ import codeSyntaxHighlight from "@toast-ui/editor-plugin-code-syntax-highlight";
 
 const EditPost = () => {
   const [content, setContent] = useState<string>(
-    `<h3> html 헤더 <span style="color:blue";>파란색</span></h3>\n`
+    ""
+    // `<h1> html 헤더 <span style="color:blue";>파란색</span></h1>\n`
   );
-  const [selectedText, setSelectedText] = useState<string>("");
+  const codeMirrorRef = useRef<ReactCodeMirrorRef>(null);
+  const viewerRef = useRef<Viewer>(null);
+  // const [selectedText, setSelectedText] = useState<string>("");
 
   const onChange = (value: string) => {
     setContent(value);
   };
 
-  const codeMirrorRef = useRef<ReactCodeMirrorRef>(null);
-
+  // codeMirror Editor에 content 추가
   const handleAddText = (text: string, position: number) => {
     const codeMirror = codeMirrorRef.current;
     if (codeMirror) {
@@ -41,47 +43,53 @@ const EditPost = () => {
     }
   };
 
-  // 더블클릭/드래그 하여 선택된 텍스트가 있을 경우
+  // Toast ui Viewer에 content 동적으로 추가
   useEffect(() => {
-    const handleSelectionChange = () => {
-      const selection = document.getSelection();
-      if (selection) {
-        const text = selection.toString();
-        setSelectedText(text);
-      }
-    };
-    document.addEventListener("selectionchange", handleSelectionChange);
-    return () => {
-      document.removeEventListener("selectionchange", handleSelectionChange);
-    };
-  }, []);
+    viewerRef.current?.getInstance().setMarkdown(content);
+  }, [content]);
+
+  // 더블클릭/드래그 하여 선택된 텍스트가 있을 경우
+  // useEffect(() => {
+  //   const handleSelectionChange = () => {
+  //     const selection = document.getSelection();
+  //     if (selection) {
+  //       const text = selection.toString();
+  //       setSelectedText(text);
+  //     }
+  //   };
+  //   document.addEventListener("selectionchange", handleSelectionChange);
+  //   return () => {
+  //     document.removeEventListener("selectionchange", handleSelectionChange);
+  //   };
+  // }, []);
 
   return (
     <div className="flex-1 flex w-full min-h-screen">
       <div className="flex flex-col mx-2 w-full">
         <ToolBarMenu setText={handleAddText} />
 
-        <CodeMirror
-          // style={{
-          //   border: "2px solid red",
-          //   borderRadius: "10px",
-          //   textAlign: "center",
-          //   color: "red",
-          // }}
-          ref={codeMirrorRef}
-          className="flex relative justify-center h-full"
-          value={content}
-          width="100%"
-          extensions={[
-            markdown({ base: markdownLanguage, codeLanguages: languages }),
-          ]}
-          onChange={onChange}
-        />
+        <div className="flex">
+          <div className="w-full h-screen">
+            <CodeMirror
+              ref={codeMirrorRef}
+              className="flex relative justify-center h-full"
+              value={content}
+              width="100%"
+              extensions={[
+                markdown({ base: markdownLanguage, codeLanguages: languages }),
+              ]}
+              onChange={onChange}
+            />
+          </div>
 
-        <Viewer
-          plugins={[[codeSyntaxHighlight, { highlighter: Prism }]]}
-          initialValue={content}
-        />
+          <div className="w-full h-screen bg-indigo-500">
+            <Viewer
+              ref={viewerRef}
+              plugins={[[codeSyntaxHighlight, { highlighter: Prism }]]}
+              initialValue={content}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
