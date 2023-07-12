@@ -23,15 +23,57 @@
   }
 
   /* CodeMirror CSS */
-  .cm-editor {
+  .cm-editor{
 	width: 100%;
 	height: 100%;
-	background-color: yellowgreen;
+	background-color: transparent;
+	padding: 5px;
   }
+
+  .cm-editor.cm-focused {
+	outline: 0px;
+  }
+
+  .cm-theme-light {
+	background-color:transparent;
+	outline: none;
+  }
+
+  .cm-scroller {
+	background-color: transparent;
+  }
+
+  .ͼ2 .cm-gutters{
+	background-color: transparent;
+	border: 0px;
+  }
+
+  .cm-gutter {
+	background-color: transparent;
+  }
+
+  .ͼ2 .cm-activeLineGutter {
+	background-color: transparent;
+  }
+
+  .ͼ2 .cm-activeLine{
+	background-color: transparent;
+  }
+
+  .ͼ1 .cm-lineNumbers .cm-gutterElement{
+	color: chartreuse;
+  }
+
+  
+
 
   /* Toast ui CSS */
   .toastui-editor-contents {
 	width:100% ;
 	height: 100%;
 	
+  }
+
+  .toastui-editor-contents p {
+	margin: 3px !important;
   }

@@ -14,13 +14,14 @@ import "@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin
 import codeSyntaxHighlight from "@toast-ui/editor-plugin-code-syntax-highlight";
 
 const EditPost = () => {
-  const [content, setContent] = useState<string>(
-    ""
-    // `<h1> html 헤더 <span style="color:blue";>파란색</span></h1>\n`
-  );
+  const [content, setContent] = useState<string>("");
   const codeMirrorRef = useRef<ReactCodeMirrorRef>(null);
   const viewerRef = useRef<Viewer>(null);
   // const [selectedText, setSelectedText] = useState<string>("");
+
+  const onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(event.currentTarget.value);
+  };
 
   const onChange = (value: string) => {
     setContent(value);
@@ -66,6 +67,14 @@ const EditPost = () => {
   return (
     <div className="flex-1 flex w-full min-h-screen">
       <div className="flex flex-col mx-2 w-full">
+        <div className="flex justify-center ">
+          <input
+            onChange={onChangeTitle}
+            type="text"
+            placeholder="제목을 입력하세요."
+            className="outline-none p-2 w-[50%] leading-[3rem] text-3xl font-semibold tracking-wider mt-20 focus:placeholder:text-transparent placeholder:text-center placeholder:text-neutral-400"
+          />
+        </div>
         <ToolBarMenu setText={handleAddText} />
 
         <div className="flex">
@@ -82,7 +91,7 @@ const EditPost = () => {
             />
           </div>
 
-          <div className="w-full h-screen bg-indigo-500">
+          <div className="w-full h-screen bg-amber-50 px-1.5">
             <Viewer
               ref={viewerRef}
               plugins={[[codeSyntaxHighlight, { highlighter: Prism }]]}
