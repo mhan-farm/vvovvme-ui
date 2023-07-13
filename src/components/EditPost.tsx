@@ -17,6 +17,7 @@ const EditPost = () => {
   const [content, setContent] = useState<string>("");
   const codeMirrorRef = useRef<ReactCodeMirrorRef>(null);
   const viewerRef = useRef<Viewer>(null);
+
   // const [selectedText, setSelectedText] = useState<string>("");
 
   const onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -72,7 +73,7 @@ const EditPost = () => {
             onChange={onChangeTitle}
             type="text"
             placeholder="제목을 입력하세요."
-            className="outline-none p-2 w-[50%] leading-[3rem] text-3xl font-semibold tracking-wider mt-20 focus:placeholder:text-transparent placeholder:text-center placeholder:text-neutral-400"
+            className="outline-none p-2 w-[50%] leading-[3rem] text-3xl font-semibold tracking-wider mt-20 focus:placeholder:text-transparent placeholder:text-center placeholder:text-neutral-400 bg-transparent"
           />
         </div>
         <ToolBarMenu setText={handleAddText} />
@@ -91,7 +92,7 @@ const EditPost = () => {
             />
           </div>
 
-          <div className="w-full h-screen bg-amber-50 px-1.5">
+          <div className="w-full h-screen bg-neutral-50 dark:bg-neutral-900">
             <Viewer
               ref={viewerRef}
               plugins={[[codeSyntaxHighlight, { highlighter: Prism }]]}

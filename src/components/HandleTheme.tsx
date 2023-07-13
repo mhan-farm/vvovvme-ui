@@ -1,4 +1,4 @@
-import { useState, useLayoutEffect } from "react";
+import { useState, useLayoutEffect, useEffect } from "react";
 import "animate.css";
 
 const LOCAL_STORAGE_KEY = {
@@ -26,14 +26,37 @@ const ThemeButton = ({}: ThemeButtonProps) => {
 
     const enabledDarkMode = htmlEl.classList.contains("dark");
 
+    const cmEditorEl = document.getElementsByClassName("cm-editor");
+
     if (enabledDarkMode) {
       htmlEl.classList.remove("dark");
       localStorage.removeItem(LOCAL_STORAGE_KEY.THEME);
+
+      for (let i = 0; i < cmEditorEl.length; i++) {
+        cmEditorEl[i].classList.remove("cm-dark");
+      }
     } else {
       htmlEl.classList.add("dark");
       localStorage.setItem(LOCAL_STORAGE_KEY.THEME, THEME.DARK);
+
+      for (let i = 0; i < cmEditorEl.length; i++) {
+        cmEditorEl[i].classList.add("cm-dark");
+      }
     }
   };
+
+  // useEffect(() => {
+  //   const htmlEl = document.querySelector("html");
+  //   const enabledDarkMode = htmlEl.classList.contains("dark");
+  //   if (htmlEl?.className === "dark") {
+  //     console.log(htmlEl.className);
+  //   }
+  //   const cmEditorEl = document.getElementsByClassName("cm-editor");
+  //   console.log("cmEl : ", cmEditorEl);
+  //   for (let i = 0; i < cmEditorEl.length; i++) {
+  //     cmEditorEl[i].classList.add("cm-dark");
+  //   }
+  // }, [toggleTheme]);
 
   return (
     <>

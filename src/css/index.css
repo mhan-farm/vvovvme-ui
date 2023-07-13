@@ -26,8 +26,17 @@
   .cm-editor{
 	width: 100%;
 	height: 100%;
-	background-color: transparent;
 	padding: 5px;
+	background-color: transparent;
+	color:black;
+  }
+
+  .cm-editor.cm-dark{
+	width: 100%;
+	height: 100%;
+	padding: 5px;
+	background-color: transparent;
+	color:white;
   }
 
   .cm-editor.cm-focused {
@@ -41,16 +50,37 @@
 
   .cm-scroller {
 	background-color: transparent;
+	padding-left: 8px;
+	padding-right: 8px;
+	padding-top: 4px;
+	padding-top: 4px;
+	font-size: 13px;
   }
+
+  .ͼ1 .cm-scroller {
+    display: flex !important;
+    align-items: flex-start !important;
+    font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', 'Arial', '나눔바른고딕', 'Nanum Barun Gothic', '맑은고딕', 'Malgun Gothic', sans-serif;
+    line-height: 1.6;
+    height: 100%;
+    overflow-x: auto;
+    position: relative;
+    z-index: 0;
+}
 
   .ͼ2 .cm-gutters{
 	background-color: transparent;
 	border: 0px;
   }
 
-  .cm-gutter {
-	background-color: transparent;
-  }
+  .ͼ1 .cm-gutter {
+    display: none !important;
+    flex-direction: column;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    min-height: 100%;
+    overflow: hidden;
+}
 
   .ͼ2 .cm-activeLineGutter {
 	background-color: transparent;
@@ -61,19 +91,27 @@
   }
 
   .ͼ1 .cm-lineNumbers .cm-gutterElement{
-	color: chartreuse;
+	color: black;
   }
-
-  
-
 
   /* Toast ui CSS */
   .toastui-editor-contents {
-	width:100% ;
+	width: 100%;
 	height: 100%;
-	
+	margin: 0;
+    padding: 0;
+    font-size: 13px;
+	line-height: 1.6;
+    font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', 'Arial', '나눔바른고딕', 'Nanum Barun Gothic', '맑은고딕', 'Malgun Gothic', sans-serif;
+    z-index: 20;
   }
 
   .toastui-editor-contents p {
-	margin: 3px !important;
+	padding-left: 22px;
+	padding-right: 22px;
+	padding-top: 3.5px;
+	padding-bottom: 3.5px;
+	/* margin: 8.7px !important; */
+	overflow-wrap: normal;
   }
+

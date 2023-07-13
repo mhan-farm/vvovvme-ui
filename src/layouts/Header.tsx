@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import HandleTheme from "../components/HandleTheme";
-import SearchPost from "../components/SearchPost";
 import LoginBtn from "../components/LoginBtn";
 import HambergerMenu from "../components/HambergerMenu";
 import { useEffect, useState } from "react";
